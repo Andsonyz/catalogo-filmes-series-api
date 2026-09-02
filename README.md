@@ -423,3 +423,4 @@ Bons estudos! Para mais informações, consulte a documentação oficial do DRF:
 [Django Rest Framework Documentation](https://www.django-rest-framework.org/?utm_source=chatgpt.com)
 
 Equipe LISA
+_
