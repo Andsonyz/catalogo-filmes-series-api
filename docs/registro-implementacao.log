@@ -1,0 +1,134 @@
+
+UTC: 2026-11-08T22:57:17.633991+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python manage.py makemigrations catalogo
+Migrations for 'catalogo':
+  catalogo/migrations/0001_initial.py
+    - Create model Genero
+    - Create model Titulo
+
+exit_code=0
+
+UTC: 2026-11-08T22:57:18.193374+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python manage.py migrate --noinput
+Operations to perform:
+  Apply all migrations: admin, auth, authtoken, catalogo, contenttypes, sessions, users
+Running migrations:
+  Applying catalogo.0001_initial... OK
+
+exit_code=0
+
+UTC: 2026-11-08T22:57:18.775728+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python manage.py check
+System check identified no issues (0 silenced).
+
+exit_code=0
+
+UTC: 2026-11-08T22:57:19.214165+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python manage.py makemigrations --check --dry-run
+No changes detected
+
+exit_code=0
+
+UTC: 2026-11-08T22:58:08.692031+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python /workspace/scratch/exercitar_catalogo_http.py
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "anônima", "request": null, "status": 200, "response": []}
+{"contagem_inicial": 0}
+{"method": "POST", "url": "http://127.0.0.1:8000/api/token-auth/", "auth": "anônima", "request": "[credenciais omitidas]", "status": 200, "response": "[token omitido]"}
+{"method": "POST", "url": "http://127.0.0.1:8000/api/generos/", "auth": "Token", "request": {"nome": "Gênero descartável API"}, "status": 201, "response": {"id": 1, "nome": "Gênero descartável API"}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/generos/", "auth": "Token", "request": null, "status": 200, "response": [{"id": 1, "nome": "Gênero descartável API"}]}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/generos/1/", "auth": "Token", "request": null, "status": 200, "response": {"id": 1, "nome": "Gênero descartável API"}}
+{"method": "POST", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "Token", "request": {"nome": "Filme descartável", "tipo": "filme", "genero": 1}, "status": 201, "response": {"id": 1, "nome": "Filme descartável", "tipo": "filme", "genero": 1, "numero_temporadas": null}}
+{"method": "POST", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "Token", "request": {"nome": "Série descartável", "tipo": "serie", "genero": 1, "numero_temporadas": 2}, "status": 201, "response": {"id": 2, "nome": "Série descartável", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "Token", "request": null, "status": 200, "response": [{"id": 1, "nome": "Filme descartável", "tipo": "filme", "genero": 1, "numero_temporadas": null}, {"id": 2, "nome": "Série descartável", "tipo": "serie", "genero": 1, "numero_temporadas": 2}]}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série descartável", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"nome": "Série renomeada"}, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "POST", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "Token", "request": {"nome": "Filme inválido", "tipo": "filme", "genero": 1, "numero_temporadas": 2}, "status": 400, "response": {"numero_temporadas": ["Filmes devem ficar sem número de temporadas (null)."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "Token", "request": null, "status": 200, "response": [{"id": 1, "nome": "Filme descartável", "tipo": "filme", "genero": 1, "numero_temporadas": null}, {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}]}
+{"contagem_apos_cadastro_rejeitado": 2, "esperada": 2}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"tipo": "filme"}, "status": 400, "response": {"numero_temporadas": ["Filmes devem ficar sem número de temporadas (null)."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"numero_temporadas": null}, "status": 400, "response": {"numero_temporadas": ["Séries exigem um número inteiro de temporadas maior ou igual a 1."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"numero_temporadas": 0}, "status": 400, "response": {"numero_temporadas": ["O número de temporadas deve ser maior ou igual a 1."]}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"numero_temporadas": -1}, "status": 400, "response": {"numero_temporadas": ["O número de temporadas deve ser maior ou igual a 1."]}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"numero_temporadas": 1.5}, "status": 400, "response": {"numero_temporadas": ["O número de temporadas deve ser um inteiro."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"tipo": "documentario"}, "status": 400, "response": {"tipo": ["O tipo deve ser filme ou serie."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"tipo": "filme", "numero_temporadas": null}, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "filme", "genero": 1, "numero_temporadas": null}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "filme", "genero": 1, "numero_temporadas": null}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"tipo": "serie"}, "status": 400, "response": {"numero_temporadas": ["Séries exigem um número inteiro de temporadas maior ou igual a 1."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "filme", "genero": 1, "numero_temporadas": null}}
+{"method": "PUT", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"nome": "Série via PUT", "tipo": "serie", "genero": 1, "numero_temporadas": 2}, "status": 200, "response": {"id": 2, "nome": "Série via PUT", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "PUT", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"nome": "PUT inválido", "tipo": "filme", "genero": 1}, "status": 400, "response": {"numero_temporadas": ["Filmes devem ficar sem número de temporadas (null)."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série via PUT", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "DELETE", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 204, "response": null}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 404, "response": {"detail": "Not found."}}
+{"method": "DELETE", "url": "http://127.0.0.1:8000/api/titulos/1/", "auth": "Token", "request": null, "status": 204, "response": null}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/1/", "auth": "Token", "request": null, "status": 404, "response": {"detail": "Not found."}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "Token", "request": null, "status": 200, "response": []}
+{"resultado": "Cenários HTTP concluídos; contagem e registros originais preservados."}
+{"limpeza": "Somente títulos, gênero, usuário e token descartáveis removidos."}
+
+exit_code=0
+
+UTC: 2026-11-08T22:58:31.733618+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python /workspace/scratch/conferir_preservacao.py
+django_migrations: registros antigos preservados; adicionada catalogo.0001_initial
+auth_group_permissions: conteúdo preexistente preservado (0 registros)
+auth_user_groups: conteúdo preexistente preservado (0 registros)
+auth_user_user_permissions: conteúdo preexistente preservado (0 registros)
+django_admin_log: conteúdo preexistente preservado (0 registros)
+Traceback (most recent call last):
+  File "/workspace/scratch/conferir_preservacao.py", line 15, in <module>
+    assert sorted(before,key=repr)==sorted(after,key=repr),table
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: django_content_type
+
+exit_code=1
+
+UTC: 2026-11-08T22:58:31.791783+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python manage.py spectacular --validate --file /workspace/scratch/catalogo-schema.yaml
+
+exit_code=0
+
+UTC: 2026-11-08T22:58:32.345917+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git diff --check
+
+exit_code=0
+
+UTC: 2026-11-08T22:58:52.273877+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python /workspace/scratch/conferir_preservacao.py
+django_migrations: registros antigos preservados; adicionada catalogo.0001_initial
+auth_group_permissions: conteúdo preexistente preservado (0 registros)
+auth_user_groups: conteúdo preexistente preservado (0 registros)
+auth_user_user_permissions: conteúdo preexistente preservado (0 registros)
+django_admin_log: conteúdo preexistente preservado (0 registros)
+django_content_type: registros antigos preservados; 2 metadados do catálogo adicionados pela migração
+auth_permission: registros antigos preservados; 8 metadados do catálogo adicionados pela migração
+auth_group: conteúdo preexistente preservado (0 registros)
+auth_user: conteúdo preexistente preservado (1 registros)
+django_session: conteúdo preexistente preservado (0 registros)
+users_userprofileexample: conteúdo preexistente preservado (0 registros)
+authtoken_token: conteúdo preexistente preservado (1 registros)
+catalogo_genero: 0 registros após limpeza
+catalogo_titulo: 0 registros após limpeza
+Sequências SQLite podem avançar com os dados descartáveis; nenhum registro anterior foi removido ou alterado.
+
+exit_code=0
+
+UTC: 2026-11-08T23:01:10.812324+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git diff --check
+
+exit_code=0

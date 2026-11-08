@@ -1,12 +1,14 @@
-# API de comandas de restaurante — Unidade 02
+# Cadastro de filmes e séries — Unidade 02
 
 Trabalho da disciplina PEX1277 — Manutenção de Software, UFERSA.
 
 **Equipe:** Andrew Ferreira de Paiva Silva, Antonio Andson de Oliveira Rocha e Sophia Hellen Pires da Silveira.
 
-**Repositório:** <https://github.com/Andsonyz/catalogo-filmes-series-api>. O nome existente foi preservado; o domínio escolhido é comandas de restaurante.
+**Repositório:** <https://github.com/Andsonyz/catalogo-filmes-series-api>. Tema definitivo: Cadastro de filmes e séries. Branch de funcionalidade: `feat/catalogo-audiovisual`.
 
-O Prompt 1 preparou e verificou o Django Quick Project com Django REST Framework e SQLite. A API de restaurante está apenas planejada; seus models e endpoints ainda não foram implementados. Consulte [as evidências, rotas planejadas e pendências](docs/evidencias.md).
+API implementada sobre o Django Quick Project, com Django REST Framework e SQLite. Consulte [as evidências e pendências](docs/evidencias.md) e [as rotas, autenticação e reprodução dos cenários HTTP](docs/api.md).
+
+O catálogo possui `Genero` e `Titulo`, relacionados por chave estrangeira. Oferece cadastro e consulta de gêneros e CRUD completo de títulos. Filmes têm `numero_temporadas` nulo; séries exigem um inteiro maior ou igual a 1, tanto no cadastro quanto na atualização. O título previsto para o relatório de entrega é **Cadastro de filmes e séries — Unidade 02**.
 
 ## Executar a base
 
@@ -21,7 +23,7 @@ venv/bin/python -m pytest -v
 venv/bin/python manage.py runserver
 ```
 
-Rotas existentes: Swagger em `/swagger/`, OpenAPI em `/schema/`, exemplo em `/users/` e autenticação em `/api/token-auth/`. As dependências e o código da base foram preservados. O histórico original permanece abaixo.
+Rotas existentes: Swagger em `/swagger/`, OpenAPI em `/schema/`, exemplo em `/users/` e autenticação em `/api/token-auth/`. As dependências da base foram mantidas. O app `catalogo` acrescenta `/api/generos/` e `/api/titulos/`. A API segue `AllowAny` da base e aceita também Basic, Session e Token. O tutorial original permanece abaixo; a documentação atual do catálogo está em `docs/api.md`.
 
 ---
 
