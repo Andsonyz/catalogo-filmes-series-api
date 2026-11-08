@@ -1,0 +1,39 @@
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "anônima", "request": null, "status": 200, "response": []}
+{"contagem_inicial": 0}
+{"method": "POST", "url": "http://127.0.0.1:8000/api/token-auth/", "auth": "anônima", "request": "[credenciais omitidas]", "status": 200, "response": "[token omitido]"}
+{"method": "POST", "url": "http://127.0.0.1:8000/api/generos/", "auth": "Token", "request": {"nome": "Gênero descartável API"}, "status": 201, "response": {"id": 1, "nome": "Gênero descartável API"}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/generos/", "auth": "Token", "request": null, "status": 200, "response": [{"id": 1, "nome": "Gênero descartável API"}]}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/generos/1/", "auth": "Token", "request": null, "status": 200, "response": {"id": 1, "nome": "Gênero descartável API"}}
+{"method": "POST", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "Token", "request": {"nome": "Filme descartável", "tipo": "filme", "genero": 1}, "status": 201, "response": {"id": 1, "nome": "Filme descartável", "tipo": "filme", "genero": 1, "numero_temporadas": null}}
+{"method": "POST", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "Token", "request": {"nome": "Série descartável", "tipo": "serie", "genero": 1, "numero_temporadas": 2}, "status": 201, "response": {"id": 2, "nome": "Série descartável", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "Token", "request": null, "status": 200, "response": [{"id": 1, "nome": "Filme descartável", "tipo": "filme", "genero": 1, "numero_temporadas": null}, {"id": 2, "nome": "Série descartável", "tipo": "serie", "genero": 1, "numero_temporadas": 2}]}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série descartável", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"nome": "Série renomeada"}, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "POST", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "Token", "request": {"nome": "Filme inválido", "tipo": "filme", "genero": 1, "numero_temporadas": 2}, "status": 400, "response": {"numero_temporadas": ["Filmes devem ficar sem número de temporadas (null)."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "Token", "request": null, "status": 200, "response": [{"id": 1, "nome": "Filme descartável", "tipo": "filme", "genero": 1, "numero_temporadas": null}, {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}]}
+{"contagem_apos_cadastro_rejeitado": 2, "esperada": 2}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"tipo": "filme"}, "status": 400, "response": {"numero_temporadas": ["Filmes devem ficar sem número de temporadas (null)."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"numero_temporadas": null}, "status": 400, "response": {"numero_temporadas": ["Séries exigem um número inteiro de temporadas maior ou igual a 1."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"numero_temporadas": 0}, "status": 400, "response": {"numero_temporadas": ["O número de temporadas deve ser maior ou igual a 1."]}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"numero_temporadas": -1}, "status": 400, "response": {"numero_temporadas": ["O número de temporadas deve ser maior ou igual a 1."]}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"numero_temporadas": 1.5}, "status": 400, "response": {"numero_temporadas": ["O número de temporadas deve ser um inteiro."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"tipo": "documentario"}, "status": 400, "response": {"tipo": ["O tipo deve ser filme ou serie."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"tipo": "filme", "numero_temporadas": null}, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "filme", "genero": 1, "numero_temporadas": null}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "filme", "genero": 1, "numero_temporadas": null}}
+{"method": "PATCH", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"tipo": "serie"}, "status": 400, "response": {"numero_temporadas": ["Séries exigem um número inteiro de temporadas maior ou igual a 1."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série renomeada", "tipo": "filme", "genero": 1, "numero_temporadas": null}}
+{"method": "PUT", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"nome": "Série via PUT", "tipo": "serie", "genero": 1, "numero_temporadas": 2}, "status": 200, "response": {"id": 2, "nome": "Série via PUT", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "PUT", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": {"nome": "PUT inválido", "tipo": "filme", "genero": 1}, "status": 400, "response": {"numero_temporadas": ["Filmes devem ficar sem número de temporadas (null)."]}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 200, "response": {"id": 2, "nome": "Série via PUT", "tipo": "serie", "genero": 1, "numero_temporadas": 2}}
+{"method": "DELETE", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 204, "response": null}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/2/", "auth": "Token", "request": null, "status": 404, "response": {"detail": "Not found."}}
+{"method": "DELETE", "url": "http://127.0.0.1:8000/api/titulos/1/", "auth": "Token", "request": null, "status": 204, "response": null}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/1/", "auth": "Token", "request": null, "status": 404, "response": {"detail": "Not found."}}
+{"method": "GET", "url": "http://127.0.0.1:8000/api/titulos/", "auth": "Token", "request": null, "status": 200, "response": []}
+{"resultado": "Cenários HTTP concluídos; contagem e registros originais preservados."}
+{"limpeza": "Somente títulos, gênero, usuário e token descartáveis removidos."}

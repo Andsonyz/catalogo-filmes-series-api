@@ -1,4 +1,4 @@
-# Unidade 02 — evidências do Prompt 1
+# Unidade 02 — evidências
 
 ## Identificação e fontes
 
@@ -9,7 +9,7 @@
 - SIGAA: equipe de até três integrantes; entrega em documento PDF único, contendo os nomes e o link do repositório; arquivo de até 10 MB; prazo exibido de 03/11/2026 às 00h00 até 10/11/2026 às 23h59. Horários transcritos da tela.
 - Relatório do professor: máximo de três páginas, com entidades/endpoints, testes, duas métricas, uso de IA e dificuldades.
 - Pontuação: Git/GitHub 2,0; API/manutenibilidade 3,5; testes 2,5; métricas 1,0; IA 1,0.
-- Recebidos o PDF e a tela; o Prompt 1 foi fornecido depois em texto. Os Prompts 2–6 não foram recebidos nem executados.
+- Na preparação inicial, foram recebidos o PDF e a tela; o Prompt 1 foi fornecido depois em texto. As etapas seguintes dependem das instruções posteriores do solicitante.
 
 ## Origem, estado inicial e preservação
 
@@ -52,7 +52,7 @@ Execução em 08/11/2026. O registro selecionado de comandos, saídas, horários
 - A API de exemplo `/users/` oferece GET/PUT, não CRUD completo. Isso é uma limitação da base a considerar na próxima etapa.
 - A tentativa de usar o navegador compartilhado retornou `Browser runtime unavailable`. A alternativa com Chromium/Playwright local funcionou: HTTP 200, título `Swagger`, operações `/api/token-auth/`, `/schema/`, `/users/` e `/users/{id}/` renderizadas; `page_errors: []`. Captura em [swagger-base.png](swagger-base.png). Isso não bloqueou a etapa nem exigiu novo acesso.
 
-## Planejamento do domínio — ainda sem implementação
+## Planejamento do domínio no Prompt 1 (histórico)
 
 Manter a estrutura Django REST Framework e SQLite da base e planejar um app `catalogo` com duas entidades.
 
@@ -67,7 +67,7 @@ Em PATCH, trocar uma série por filme exige enviar também `numero_temporadas: n
 
 ### Rotas planejadas
 
-As rotas abaixo **não existem nesta etapa**.
+No Prompt 1, as rotas abaixo ainda não existiam. Foram implementadas na etapa registrada ao final deste documento.
 
 | Métodos | Rota | Finalidade |
 | --- | --- | --- |
@@ -112,7 +112,7 @@ Resultado esperado: HTTP 400, com mensagem como `Séries exigem um número intei
 
 Exemplo de atualização: em uma série com três temporadas, `PATCH /api/titulos/{id}/` com `{"tipo":"filme"}` deve retornar 400; com `{"tipo":"filme","numero_temporadas":null}` deve retornar 200.
 
-## Pendências e limite desta etapa
+## Pendências ao fim do Prompt 1 (histórico)
 
 - Aguardar o próximo prompt antes de implementar app, models, serializers, views, validações, migrations ou rotas do catálogo.
 - Implementar e executar pelo menos quatro testes de comportamento (cadastro, consulta, atualização/exclusão e regra de negócio).
@@ -140,3 +140,67 @@ Exemplo de atualização: em uma série com três temporadas, `PATCH /api/titulo
 - Mantidos os resultados reais da primeira execução, o arquivo `registro-prompt1.log` e a captura `swagger-base.png` sem alteração. Referências ao tema antigo nesses registros e nesta explicação são históricas, não fazem parte do escopo vigente.
 - A revisão documental desta correção e as verificações do estado Git estão em [registro-correcao-tema.log](registro-correcao-tema.log). As verificações de execução da base acima pertencem à primeira execução; não foram apresentadas como novas execuções nesta correção documental.
 - A correção será registrada em novo commit descritivo, sem reescrever commits nem realizar merge da nova branch. O hash final e a publicação são informados no fechamento da conversa.
+
+## Implementação da API — etapa atual
+
+Branch `feat/catalogo-audiovisual`, iniciada nesta etapa em `983f5e9`, com checkout limpo. Reutilizado o remoto `origin` da equipe. Implementados o app `catalogo`, models `Genero` e `Titulo`, FK com `PROTECT`, migration `0001_initial`, serializers e viewsets registrados no `SimpleRouter` da base. Nenhuma interface adicional foi criada.
+
+A validação de entrada está centralizada em `TituloSerializer`: `tipo` aceita `filme`/`serie`; o campo de temporadas valida inteiro ≥ 1 quando não nulo; `validate()` verifica a combinação de tipo e temporadas para POST, PUT e PATCH. Campos omitidos utilizam o estado persistido; `null` explícito é mantido. A validação ocorre antes de salvar. Essa regra é da API; escritas diretas pelo ORM não passam pelo serializer.
+
+Permissões verificadas: `users` usa `AllowAny`; não há `DEFAULT_PERMISSION_CLASSES` restritiva. Mantido `AllowAny` no catálogo, com Basic/Session/Token herdados. A consulta anônima retornou 200. Os cenários de escrita e leitura foram realizados com Token obtido em `/api/token-auth/` usando usuário descartável. Usuário, senha e token não foram registrados em texto aberto. Reprodução: [api.md](api.md).
+
+### Verificações executadas
+
+| Comando | Resultado real |
+| --- | --- |
+| `venv/bin/python manage.py makemigrations catalogo` | Criada `catalogo/migrations/0001_initial.py` |
+| `venv/bin/python manage.py migrate --noinput` | `Applying catalogo.0001_initial... OK` |
+| `venv/bin/python manage.py check` | `System check identified no issues (0 silenced).` |
+| `venv/bin/python manage.py makemigrations --check --dry-run` | `No changes detected` |
+| `venv/bin/python manage.py runserver 127.0.0.1:8000 --noreload` | Servidor iniciado; usado pelos cenários HTTP reais e encerrado ao final com Ctrl+C |
+| `venv/bin/python manage.py spectacular --validate --file /workspace/scratch/catalogo-schema.yaml` | Código 0, schema OpenAPI válido |
+| `git diff --check` | Código 0 |
+
+Logs: [registro-implementacao.log](registro-implementacao.log) e [cenarios-api.log](cenarios-api.log). As chamadas HTTP foram feitas por um script temporário em `/workspace/scratch/exercitar_catalogo_http.py`, fora da suíte de testes. Nenhum teste automatizado de Django/pytest foi criado ou executado nesta etapa, conforme o limite solicitado.
+
+### Resultados HTTP observados
+
+Todas as URLs abaixo usam `http://127.0.0.1:8000`. IDs 1 e 2 foram gerados nesta execução e os respectivos registros já foram removidos.
+
+| Método e URL | HTTP | Resultado |
+| --- | --- | --- |
+| GET `/api/titulos/`, anônimo | 200 | Lista inicial vazia; contagem 0 |
+| POST `/api/token-auth/` | 200 | Token válido para o usuário descartável |
+| POST `/api/generos/` | 201 | Gênero descartável, ID 1 |
+| GET `/api/generos/` e `/api/generos/1/` | 200 | Listagem e consulta do gênero criado |
+| POST `/api/titulos/`, filme com temporadas omitidas | 201 | ID 1, temporadas nulas |
+| POST `/api/titulos/`, série com duas temporadas | 201 | ID 2, temporadas 2 |
+| GET `/api/titulos/` e `/api/titulos/2/` | 200 | Dois títulos; detalhe da série correto |
+| PATCH `/api/titulos/2/`, apenas nome | 200 | Nome alterado; temporadas continuam 2, confirmado por GET |
+| POST `/api/titulos/`, filme com temporadas 2 | 400 | Mensagem sobre temporadas nulas; contagem permaneceu 2 |
+| PATCH `/api/titulos/2/`, apenas tipo filme | 400 | Estado anterior preservado, confirmado por GET |
+| PATCH `/api/titulos/2/`, temporadas null mantendo série | 400 | Registro preservado |
+| PATCH `/api/titulos/2/`, temporadas 0, −1 ou 1.5 | 400 | Validação de inteiro positivo; registro preservado |
+| PATCH `/api/titulos/2/`, tipo documentario | 400 | Tipo inválido; registro preservado |
+| PATCH `/api/titulos/2/`, tipo filme e temporadas null | 200 | Conversão válida, confirmada por GET |
+| PATCH `/api/titulos/2/`, apenas tipo série após conversão | 400 | Filme com temporadas nulas preservado |
+| PUT `/api/titulos/2/`, série completa com temporadas 2 | 200 | Atualização integral válida |
+| PUT `/api/titulos/2/`, filme omitindo temporadas ainda persistidas | 400 | Registro preservado, inclusive nome |
+| DELETE `/api/titulos/2/` e `/api/titulos/1/` | 204 | Ambos os títulos descartáveis excluídos |
+| GET de cada título excluído | 404 | Exclusão confirmada |
+| GET `/api/titulos/` ao final | 200 | Lista vazia; contagem voltou a 0 |
+
+### Preservação e dificuldades
+
+Antes das migrações foi criada uma cópia SQLite de segurança em `/workspace/scratch/catalogo-antes-api.sqlite3`. A conferência final comparou todas as linhas das tabelas preexistentes. O usuário e o token originais foram preservados. As únicas adições permanentes foram a migration do catálogo, dois content types e oito permissões padrão do Django; sequências SQLite também avançaram com os registros descartáveis.
+
+A primeira versão do verificador de preservação falhou ao exigir igualdade total em `django_content_type`, sem considerar metadados criados por `migrate`. A inspeção mostrou zero linhas antigas removidas/alteradas e somente os dois content types e oito permissões esperados. O verificador foi ajustado para permitir exatamente essas adições, preservando a comparação de todas as linhas anteriores; a nova execução terminou com código 0. Essa falha foi do verificador auxiliar, não da API, e permanece no log.
+
+Os títulos foram excluídos pela API. O gênero e o usuário/token temporários foram removidos pelo ORM, limitados aos IDs criados nesta execução; não há endpoint de exclusão de gêneros no escopo. As tabelas do catálogo terminaram vazias. O banco local permanece migrado e, por já ser versionado na base, aparece como modificado no checkout; não será incluído nos commits de código/documentação. Novos checkouts aplicam a migration normalmente.
+
+### Commits e pendências
+
+- `14f0c61` — `feat: modela gêneros e títulos com persistência SQLite`.
+- `a6693cd` — `feat: expõe catálogo REST com validação de temporadas em criação e atualização`.
+- Evidências e instruções de reprodução recebem commit documental separado.
+- Parar antes da etapa de testes automatizados. Continuam pendentes testes, métricas, análise acadêmica de uso de IA, merge e relatório final. O teste demonstrativo herdado continua no projeto; seu resultado antigo não representa validação automatizada da nova API.
