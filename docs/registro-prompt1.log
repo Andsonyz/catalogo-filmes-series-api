@@ -1,0 +1,423 @@
+Registro selecionado real do Prompt 1. Saídas de leitura integral de código e metadados pessoais foram omitidas. Horários UTC.
+
+Pré-verificação da Unidade 02. Prompt 1 ainda não recebido.
+
+UTC: 2026-11-08T22:34:03.665046+00:00
+$ git ls-remote --symref https://github.com/Andsonyz/catalogo-filmes-series-api.git HEAD refs/heads/*
+
+exit_code=0
+
+UTC: 2026-11-08T22:34:04.265755+00:00
+$ git ls-remote --symref https://github.com/lisa-ufersa/django-quickproject.git HEAD refs/heads/*
+ref: refs/heads/main	HEAD
+a59bd49d22f3a0987798cc84449797f5849b4d03	HEAD
+fc36298d4c7d77eff18259e926d4f347cf294282	refs/heads/develop
+a59bd49d22f3a0987798cc84449797f5849b4d03	refs/heads/main
+7e0dd89863a786ced07aff3f429f3cd9edb6b09e	refs/heads/master
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:30.154811+00:00
+cwd: /workspace
+$ git rev-parse --show-toplevel
+fatal: not a git repository (or any of the parent directories): .git
+
+exit_code=128
+
+
+UTC: 2026-11-08T22:34:30.413344+00:00
+cwd: /workspace
+$ git clone --origin upstream https://github.com/lisa-ufersa/django-quickproject.git /workspace/catalogo-filmes-series-api
+Cloning into '/workspace/catalogo-filmes-series-api'...
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:36.345386+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git status --short --branch
+## main...upstream/main
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:36.386093+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git remote -v
+upstream	https://github.com/lisa-ufersa/django-quickproject.git (fetch)
+upstream	https://github.com/lisa-ufersa/django-quickproject.git (push)
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:36.419321+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git log -5 --oneline
+a59bd49 ssh-key test
+39c62da README.md updated
+2f5b1ae Update requirements.txt
+398300b Update config directory
+1ebc6c4 pytest settings update
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:36.455441+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ rg --files --hidden -g '!.git/**'
+db.sqlite3
+README.md
+.gitignore
+LICENSE
+.vscode/settings.json
+manage.py
+config/urls.py
+config/asgi.py
+config/wsgi.py
+config/settings.py
+config/__init__.py
+requirements.txt
+pytest.ini
+users/tests.py
+users/views.py
+users/api/serializers.py
+users/api/views.py
+users/admin.py
+users/apps.py
+users/migrations/0001_initial.py
+users/migrations/__init__.py
+users/models.py
+users/__init__.py
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:36.496295+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git rev-parse --git-dir --git-common-dir --show-superproject-working-tree
+.git
+.git
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:52.696470+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git remote add origin https://github.com/Andsonyz/catalogo-filmes-series-api.git
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:52.731713+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git remote set-url --push upstream DISABLED
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:52.767888+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git switch -c feat/comandas-restaurante
+Switched to a new branch 'feat/comandas-restaurante'
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:52.801964+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ python3 --version
+Python 3.12.14
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:52.840287+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ python3 -m venv venv
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:55.085755+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ sha256sum db.sqlite3
+ddb8f6692e1bc205e55c1407949ed18b71b1ac70f2615eb5e1ca52e9c6d96ad7  db.sqlite3
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:34:55.119833+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python -m pip install -r requirements.txt
+Collecting asgiref==3.7.2 (from -r requirements.txt (line 1))
+  Downloading asgiref-3.7.2-py3-none-any.whl.metadata (9.2 kB)
+Collecting attrs==23.1.0 (from -r requirements.txt (line 2))
+  Downloading attrs-23.1.0-py3-none-any.whl.metadata (11 kB)
+Collecting Django==4.2.3 (from -r requirements.txt (line 3))
+  Downloading Django-4.2.3-py3-none-any.whl.metadata (4.1 kB)
+Collecting djangorestframework==3.14.0 (from -r requirements.txt (line 4))
+  Downloading djangorestframework-3.14.0-py3-none-any.whl.metadata (10 kB)
+Collecting drf-spectacular==0.26.4 (from -r requirements.txt (line 5))
+  Downloading drf_spectacular-0.26.4-py3-none-any.whl.metadata (13 kB)
+Collecting drf-yasg==1.21.7 (from -r requirements.txt (line 6))
+  Downloading drf_yasg-1.21.7-py3-none-any.whl.metadata (16 kB)
+Collecting exceptiongroup==1.2.0 (from -r requirements.txt (line 7))
+  Downloading exceptiongroup-1.2.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting inflection==0.5.1 (from -r requirements.txt (line 8))
+  Downloading inflection-0.5.1-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting iniconfig==2.0.0 (from -r requirements.txt (line 9))
+  Downloading iniconfig-2.0.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting jsonschema==4.19.0 (from -r requirements.txt (line 10))
+  Downloading jsonschema-4.19.0-py3-none-any.whl.metadata (8.2 kB)
+Collecting jsonschema-specifications==2023.7.1 (from -r requirements.txt (line 11))
+  Downloading jsonschema_specifications-2023.7.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting packaging==23.1 (from -r requirements.txt (line 12))
+  Downloading packaging-23.1-py3-none-any.whl.metadata (3.1 kB)
+Collecting pluggy==1.4.0 (from -r requirements.txt (line 13))
+  Downloading pluggy-1.4.0-py3-none-any.whl.metadata (4.3 kB)
+Collecting pytest==8.1.1 (from -r requirements.txt (line 14))
+  Downloading pytest-8.1.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting pytest-django==4.8.0 (from -r requirements.txt (line 15))
+  Downloading pytest_django-4.8.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting pytz==2023.3 (from -r requirements.txt (line 16))
+  Downloading pytz-2023.3-py2.py3-none-any.whl.metadata (22 kB)
+Collecting PyYAML==6.0.1 (from -r requirements.txt (line 17))
+  Downloading PyYAML-6.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+Collecting referencing==0.30.2 (from -r requirements.txt (line 18))
+  Downloading referencing-0.30.2-py3-none-any.whl.metadata (2.6 kB)
+Collecting rpds-py==0.30.0 (from -r requirements.txt (line 19))
+  Downloading rpds_py-0.30.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+Collecting sqlparse==0.4.4 (from -r requirements.txt (line 20))
+  Downloading sqlparse-0.4.4-py3-none-any.whl.metadata (4.0 kB)
+Collecting tomli==2.0.1 (from -r requirements.txt (line 21))
+  Downloading tomli-2.0.1-py3-none-any.whl.metadata (8.9 kB)
+Collecting typing_extensions==4.7.1 (from -r requirements.txt (line 22))
+  Downloading typing_extensions-4.7.1-py3-none-any.whl.metadata (3.1 kB)
+Collecting uritemplate==4.1.1 (from -r requirements.txt (line 23))
+  Downloading uritemplate-4.1.1-py2.py3-none-any.whl.metadata (2.9 kB)
+Downloading asgiref-3.7.2-py3-none-any.whl (24 kB)
+Downloading attrs-23.1.0-py3-none-any.whl (61 kB)
+Downloading Django-4.2.3-py3-none-any.whl (8.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.0/8.0 MB 26.8 MB/s eta 0:00:00
+Downloading djangorestframework-3.14.0-py3-none-any.whl (1.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.1/1.1 MB 34.9 MB/s eta 0:00:00
+Downloading drf_spectacular-0.26.4-py3-none-any.whl (93 kB)
+Downloading drf_yasg-1.21.7-py3-none-any.whl (4.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.3/4.3 MB 28.7 MB/s eta 0:00:00
+Downloading exceptiongroup-1.2.0-py3-none-any.whl (16 kB)
+Downloading inflection-0.5.1-py2.py3-none-any.whl (9.5 kB)
+Downloading iniconfig-2.0.0-py3-none-any.whl (5.9 kB)
+Downloading jsonschema-4.19.0-py3-none-any.whl (83 kB)
+Downloading jsonschema_specifications-2023.7.1-py3-none-any.whl (17 kB)
+Downloading packaging-23.1-py3-none-any.whl (48 kB)
+Downloading pluggy-1.4.0-py3-none-any.whl (20 kB)
+Downloading pytest-8.1.1-py3-none-any.whl (337 kB)
+Downloading pytest_django-4.8.0-py3-none-any.whl (23 kB)
+Downloading pytz-2023.3-py2.py3-none-any.whl (502 kB)
+Downloading PyYAML-6.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (724 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 725.0/725.0 kB 45.8 MB/s eta 0:00:00
+Downloading referencing-0.30.2-py3-none-any.whl (25 kB)
+Downloading rpds_py-0.30.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (394 kB)
+Downloading sqlparse-0.4.4-py3-none-any.whl (41 kB)
+Downloading tomli-2.0.1-py3-none-any.whl (12 kB)
+Downloading typing_extensions-4.7.1-py3-none-any.whl (33 kB)
+Downloading uritemplate-4.1.1-py2.py3-none-any.whl (10 kB)
+Installing collected packages: pytz, uritemplate, typing_extensions, tomli, sqlparse, rpds-py, PyYAML, pluggy, packaging, iniconfig, inflection, exceptiongroup, attrs, asgiref, referencing, pytest, Django, pytest-django, jsonschema-specifications, djangorestframework, jsonschema, drf-yasg, drf-spectacular
+Successfully installed Django-4.2.3 PyYAML-6.0.1 asgiref-3.7.2 attrs-23.1.0 djangorestframework-3.14.0 drf-spectacular-0.26.4 drf-yasg-1.21.7 exceptiongroup-1.2.0 inflection-0.5.1 iniconfig-2.0.0 jsonschema-4.19.0 jsonschema-specifications-2023.7.1 packaging-23.1 pluggy-1.4.0 pytest-8.1.1 pytest-django-4.8.0 pytz-2023.3 referencing-0.30.2 rpds-py-0.30.0 sqlparse-0.4.4 tomli-2.0.1 typing_extensions-4.7.1 uritemplate-4.1.1
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:17.819989+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python -m pip check
+No broken requirements found.
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:18.120371+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python manage.py migrate --noinput
+Operations to perform:
+  Apply all migrations: admin, auth, authtoken, contenttypes, sessions, users
+Running migrations:
+  No migrations to apply.
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:18.615483+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python manage.py check
+System check identified no issues (0 silenced).
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:19.019667+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python -m pytest -v
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-8.1.1, pluggy-1.4.0 -- /workspace/catalogo-filmes-series-api/venv/bin/python
+cachedir: .pytest_cache
+django: version: 4.2.3, settings: config.settings (from ini)
+rootdir: /workspace/catalogo-filmes-series-api
+configfile: pytest.ini
+plugins: django-4.8.0
+collecting ... collected 1 item
+
+users/tests.py::UserTestCase::test_user PASSED                           [100%]
+
+============================== 1 passed in 0.25s ===============================
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:19.811737+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ sha256sum db.sqlite3
+ddb8f6692e1bc205e55c1407949ed18b71b1ac70f2615eb5e1ca52e9c6d96ad7  db.sqlite3
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:19.850555+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git status --short
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:25.260287+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python manage.py runserver 127.0.0.1:8000 --noreload
+
+
+UTC: 2026-11-08T22:35:40.217183+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ curl --silent --show-error --max-time 20 --output /workspace/scratch/unidade02-swagger.html --write-out 'HTTP %{http_code}; tipo %{content_type}; bytes %{size_download}\n' http://127.0.0.1:8000/swagger/
+HTTP 200; tipo text/html; charset=utf-8; bytes 4445
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:40.324417+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ curl --silent --show-error --max-time 20 --output /workspace/scratch/unidade02-schema.yaml --write-out 'HTTP %{http_code}; tipo %{content_type}; bytes %{size_download}\n' http://127.0.0.1:8000/schema/
+HTTP 200; tipo application/vnd.oai.openapi; charset=utf-8; bytes 6538
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:40.383515+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ curl --silent --show-error --max-time 20 --output /workspace/scratch/unidade02-users.json --write-out 'HTTP %{http_code}; tipo %{content_type}; bytes %{size_download}\n' http://127.0.0.1:8000/users/
+HTTP 200; tipo application/json; bytes 2
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:40.428552+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ curl --silent --show-error --max-time 20 -X OPTIONS http://127.0.0.1:8000/users/
+{"detail":"Method \"OPTIONS\" not allowed."}
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:40.475667+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ curl --silent --show-error --max-time 20 -X POST -H 'Content-Type: application/json' -d '{}' --write-out '\nHTTP %{http_code}\n' http://127.0.0.1:8000/api/token-auth/
+{"username":["This field is required."],"password":["This field is required."]}
+HTTP 400
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:59.385946+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ curl --silent --show-error --max-time 20 -X OPTIONS --write-out '\nHTTP %{http_code}\n' http://127.0.0.1:8000/users/
+{"detail":"Method \"OPTIONS\" not allowed."}
+HTTP 405
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:59.428900+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ curl --silent --show-error --max-time 20 --output /workspace/scratch/unidade02-user-inexistente.json --write-out 'HTTP %{http_code}\n' http://127.0.0.1:8000/users/999999/
+HTTP 404
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:59.476964+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git remote -v
+origin	https://github.com/Andsonyz/catalogo-filmes-series-api.git (fetch)
+origin	https://github.com/Andsonyz/catalogo-filmes-series-api.git (push)
+upstream	https://github.com/lisa-ufersa/django-quickproject.git (fetch)
+upstream	DISABLED (push)
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:59.512522+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git rev-parse HEAD
+a59bd49d22f3a0987798cc84449797f5849b4d03
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:35:59.545901+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git log '--format=%h %s' -1
+a59bd49 ssh-key test
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:36:21.317816+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ python3 -c 'import importlib.util; print("playwright:", bool(importlib.util.find_spec("playwright")))'
+playwright: True
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:36:31.169179+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ python3 /workspace/scratch/verificar_swagger.py
+{"http": 200, "title": "Swagger", "paths": ["/api/token-auth/", "/schema/", "/users/", "/users/{id}/", "/users/{id}/"], "page_errors": []}
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:37:42.038232+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git diff --check
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:37:42.073445+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git diff --stat
+ README.md | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:37:42.109787+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git status --short
+ M README.md
+?? docs/
+
+exit_code=0
