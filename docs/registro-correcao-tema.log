@@ -1,0 +1,49 @@
+Correção documental do Prompt 1 — Cadastro de filmes e séries.
+Verificações da base permanecem no registro original; não repetidas nesta correção.
+
+UTC: 2026-11-08T22:52:35.442268+00:00
+$ git status --short --branch
+## feat/catalogo-audiovisual...origin/main
+ M README.md
+ M docs/evidencias.md
+?? docs/registro-correcao-tema.log
+exit_code=0
+
+UTC: 2026-11-08T22:52:35.444633+00:00
+$ git remote -v
+origin	https://github.com/Andsonyz/catalogo-filmes-series-api.git (fetch)
+origin	https://github.com/Andsonyz/catalogo-filmes-series-api.git (push)
+upstream	https://github.com/lisa-ufersa/django-quickproject.git (fetch)
+upstream	DISABLED (push)
+exit_code=0
+
+UTC: 2026-11-08T22:52:35.447536+00:00
+$ git log -4 --oneline
+963f6b7 Merge pull request #1 from Andsonyz/feat/comandas-restaurante
+12f8f3f docs: completa evidências de publicação e verificação da base
+51cb8d4 docs: registra preparação da base e planejamento de comandas
+a59bd49 ssh-key test
+exit_code=0
+
+UTC: 2026-11-08T22:52:35.451004+00:00
+$ git diff --check
+exit_code=0
+
+UTC: 2026-11-08T22:52:35.454411+00:00
+$ git diff --stat
+ README.md          |  8 +++---
+ docs/evidencias.md | 75 +++++++++++++++++++++++++++++++++++-------------------
+ 2 files changed, 54 insertions(+), 29 deletions(-)
+exit_code=0
+
+UTC: 2026-11-08T22:52:35.458291+00:00
+$ git diff --name-only origin/main -- '*.py' requirements.txt pytest.ini db.sqlite3 docs/registro-prompt1.log docs/swagger-base.png
+exit_code=0
+
+UTC: 2026-11-08T22:52:35.460778+00:00
+$ git merge-base --is-ancestor 963f6b704c30e119d84641123a6fcd1ea14f2a8d HEAD
+exit_code=0
+
+UTC: 2026-11-08T22:52:35.463573+00:00
+$ git merge-base --is-ancestor a59bd49d22f3a0987798cc84449797f5849b4d03 HEAD
+exit_code=0
