@@ -1,3 +1,30 @@
+# API de comandas de restaurante — Unidade 02
+
+Trabalho da disciplina PEX1277 — Manutenção de Software, UFERSA.
+
+**Equipe:** Andrew Ferreira de Paiva Silva, Antonio Andson de Oliveira Rocha e Sophia Hellen Pires da Silveira.
+
+**Repositório:** <https://github.com/Andsonyz/catalogo-filmes-series-api>. O nome existente foi preservado; o domínio escolhido é comandas de restaurante.
+
+O Prompt 1 preparou e verificou o Django Quick Project com Django REST Framework e SQLite. A API de restaurante está apenas planejada; seus models e endpoints ainda não foram implementados. Consulte [as evidências, rotas planejadas e pendências](docs/evidencias.md).
+
+## Executar a base
+
+Reproduzido com Python 3.12.14 no Linux:
+
+```bash
+python3 -m venv venv
+venv/bin/python -m pip install -r requirements.txt
+venv/bin/python manage.py migrate --noinput
+venv/bin/python manage.py check
+venv/bin/python -m pytest -v
+venv/bin/python manage.py runserver
+```
+
+Rotas existentes: Swagger em `/swagger/`, OpenAPI em `/schema/`, exemplo em `/users/` e autenticação em `/api/token-auth/`. As dependências e o código da base foram preservados. O histórico original permanece abaixo.
+
+---
+
 ### Bem-vindo ao DRF Quick Project!
 
 Nesta experiência de aprendizado interativa, você aprenderá uma breve visão sobre o desenvolvimento de Web APIs com Django Rest Framework (DRF). Seja você iniciante em Django ou já familiarizado com ele, este projeto fornecerá uma abordagem prática e passo a passo para criar APIs RESTful rapidamente.
