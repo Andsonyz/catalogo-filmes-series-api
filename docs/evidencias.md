@@ -39,7 +39,7 @@ Execução em 08/11/2026. O registro selecionado de comandos, saídas, horários
 | `venv/bin/python manage.py migrate --noinput` | Código 0: `No migrations to apply.` |
 | `venv/bin/python manage.py check` | Código 0: `System check identified no issues (0 silenced).` |
 | `venv/bin/python -m pytest -v` | Código 0: **1 passed**; executor conforme `pytest.ini` e README da base |
-| `venv/bin/python manage.py runserver 127.0.0.1:8000 --noreload` | Servidor local iniciado para verificação HTTP |
+| `venv/bin/python manage.py runserver 127.0.0.1:8000 --noreload` | Servidor local iniciado e verificado; encerrado intencionalmente ao final por SIGTERM (retorno −15), não por falha da aplicação |
 | `curl` em `/swagger/`, `/schema/`, `/users/` | HTTP 200 nas três rotas; `/users/` retorna `[]` |
 | `curl -X POST` com `{}` em `/api/token-auth/` | HTTP 400, informando usuário e senha obrigatórios; rota acessível |
 | `curl` em `/users/999999/` | HTTP 404 para registro inexistente |
@@ -107,4 +107,13 @@ Resultado esperado: HTTP 400, com mensagem como `Não é permitido adicionar ite
 - Coletar duas métricas com resultados reais e analisar manutenibilidade.
 - Registrar uma sugestão de melhoria/teste feita pela IA, sua resposta, decisão de uso e validação. O uso de IA para preparar esta etapa não substitui sozinho essa exigência.
 - Realizar merge da funcionalidade em etapa apropriada e concluir README e relatório PDF de até três páginas com os três integrantes e link do repositório.
-- Situação dos commits e publicação: complementar após executá-los.
+
+## Registro Git desta etapa
+
+- Commit de preparação: `51cb8d482fa219ae8021c418fefe6dd936d36a25` — `docs: registra preparação da base e planejamento de comandas`.
+- `git push --set-upstream origin main feat/comandas-restaurante`: código 0; as duas branches foram publicadas sem sobrescrever histórico existente.
+- `git ls-remote --symref origin HEAD refs/heads/main refs/heads/feat/comandas-restaurante`: confirmou branch padrão `main` apontando para a revisão original do professor e a funcionalidade apontando para o commit de preparação.
+- `git merge-base --is-ancestor a59bd49d22f3a0987798cc84449797f5849b4d03 HEAD`: código 0, confirmando ancestralidade da base.
+- `git diff --name-only a59bd49d22f3a0987798cc84449797f5849b4d03 -- '*.py' requirements.txt pytest.ini db.sqlite3`: saída vazia, código 0; nenhum código, dependência, teste ou banco da base foi alterado.
+- `git diff --cached --check`: código 0 antes do commit. `git status --short --branch` após a primeira publicação: branch sincronizada e checkout limpo.
+- Este fechamento e o registro de publicação recebem commit documental complementar; consultar `git log -2 --oneline` para os dois hashes. Nenhum merge foi feito. Nenhuma pendência de acesso permaneceu.

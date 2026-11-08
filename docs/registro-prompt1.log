@@ -1,4 +1,4 @@
-Registro selecionado real do Prompt 1. Saídas de leitura integral de código e metadados pessoais foram omitidas. Horários UTC.
+Registro selecionado real do Prompt 1. Saídas de leitura integral de código, comando auxiliar de encerramento e metadados pessoais omitidos. Horários UTC.
 
 Pré-verificação da Unidade 02. Prompt 1 ainda não recebido.
 
@@ -421,3 +421,104 @@ $ git status --short
 ?? docs/
 
 exit_code=0
+
+
+UTC: 2026-11-08T22:38:10.354279+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git add README.md docs/evidencias.md docs/registro-prompt1.log docs/swagger-base.png
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:38:10.394542+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git diff --cached --check
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:38:10.430411+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git diff --cached --stat
+ README.md                 |  27 +++
+ docs/evidencias.md        | 110 ++++++++++++
+ docs/registro-prompt1.log | 423 ++++++++++++++++++++++++++++++++++++++++++++++
+ docs/swagger-base.png     | Bin 0 -> 40302 bytes
+ 4 files changed, 560 insertions(+)
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:38:10.463530+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git diff --name-only a59bd49d22f3a0987798cc84449797f5849b4d03 -- '*.py' requirements.txt pytest.ini db.sqlite3
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:38:10.499201+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git commit -m 'docs: registra preparação da base e planejamento de comandas'
+[feat/comandas-restaurante 51cb8d4] docs: registra preparação da base e planejamento de comandas
+ 4 files changed, 560 insertions(+)
+ create mode 100644 docs/evidencias.md
+ create mode 100644 docs/registro-prompt1.log
+ create mode 100644 docs/swagger-base.png
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:38:16.672249+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git push --set-upstream origin main feat/comandas-restaurante
+To https://github.com/Andsonyz/catalogo-filmes-series-api.git
+ * [new branch]      main -> main
+ * [new branch]      feat/comandas-restaurante -> feat/comandas-restaurante
+branch 'main' set up to track 'origin/main'.
+branch 'feat/comandas-restaurante' set up to track 'origin/feat/comandas-restaurante'.
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:38:47.040029+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git ls-remote --symref origin HEAD refs/heads/main refs/heads/feat/comandas-restaurante
+ref: refs/heads/main	HEAD
+a59bd49d22f3a0987798cc84449797f5849b4d03	HEAD
+51cb8d482fa219ae8021c418fefe6dd936d36a25	refs/heads/feat/comandas-restaurante
+a59bd49d22f3a0987798cc84449797f5849b4d03	refs/heads/main
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:38:47.700408+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git merge-base --is-ancestor a59bd49d22f3a0987798cc84449797f5849b4d03 HEAD
+
+exit_code=0
+
+
+UTC: 2026-11-08T22:38:47.735583+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ git status --short --branch
+## feat/comandas-restaurante...origin/feat/comandas-restaurante
+
+exit_code=0
+
+
+Saída do runserver ao encerrar intencionalmente por SIGTERM:
+[08/Nov/2026 22:35:40] "GET /swagger/ HTTP/1.1" 200 4445
+[08/Nov/2026 22:35:40] "GET /schema/ HTTP/1.1" 200 6538
+[08/Nov/2026 22:35:40] "GET /users/ HTTP/1.1" 200 2
+Method Not Allowed: /users/
+[08/Nov/2026 22:35:40] "OPTIONS /users/ HTTP/1.1" 405 44
+Bad Request: /api/token-auth/
+[08/Nov/2026 22:35:40] "POST /api/token-auth/ HTTP/1.1" 400 79
+Method Not Allowed: /users/
+[08/Nov/2026 22:35:59] "OPTIONS /users/ HTTP/1.1" 405 44
+Not Found: /users/999999/
+[08/Nov/2026 22:35:59] "GET /users/999999/ HTTP/1.1" 404 23
+[08/Nov/2026 22:36:32] "GET /swagger/ HTTP/1.1" 200 4445
+[08/Nov/2026 22:36:33] "GET /schema/ HTTP/1.1" 200 15367
+
+exit_code=-15
