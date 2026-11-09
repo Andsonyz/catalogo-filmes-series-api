@@ -1,0 +1,149 @@
+{
+  "catalogo/models.py": [
+    {
+      "type": "class",
+      "rank": "A",
+      "lineno": 4,
+      "name": "Genero",
+      "col_offset": 0,
+      "endline": 11,
+      "complexity": 2,
+      "methods": [
+        {
+          "type": "method",
+          "rank": "A",
+          "lineno": 10,
+          "name": "__str__",
+          "col_offset": 4,
+          "endline": 11,
+          "complexity": 1,
+          "classname": "Genero",
+          "closures": []
+        }
+      ]
+    },
+    {
+      "type": "class",
+      "rank": "A",
+      "lineno": 14,
+      "name": "Titulo",
+      "col_offset": 0,
+      "endline": 30,
+      "complexity": 2,
+      "methods": [
+        {
+          "type": "method",
+          "rank": "A",
+          "lineno": 29,
+          "name": "__str__",
+          "col_offset": 4,
+          "endline": 30,
+          "complexity": 1,
+          "classname": "Titulo",
+          "closures": []
+        }
+      ]
+    },
+    {
+      "type": "method",
+      "rank": "A",
+      "lineno": 10,
+      "name": "__str__",
+      "col_offset": 4,
+      "endline": 11,
+      "complexity": 1,
+      "classname": "Genero",
+      "closures": []
+    },
+    {
+      "type": "method",
+      "rank": "A",
+      "lineno": 29,
+      "name": "__str__",
+      "col_offset": 4,
+      "endline": 30,
+      "complexity": 1,
+      "classname": "Titulo",
+      "closures": []
+    }
+  ],
+  "catalogo/apps.py": [
+    {
+      "type": "class",
+      "rank": "A",
+      "lineno": 4,
+      "name": "CatalogoConfig",
+      "col_offset": 0,
+      "endline": 6,
+      "complexity": 1,
+      "methods": []
+    }
+  ],
+  "catalogo/api/views.py": [
+    {
+      "type": "class",
+      "rank": "A",
+      "lineno": 8,
+      "name": "GeneroViewSet",
+      "col_offset": 0,
+      "endline": 16,
+      "complexity": 1,
+      "methods": []
+    },
+    {
+      "type": "class",
+      "rank": "A",
+      "lineno": 19,
+      "name": "TituloViewSet",
+      "col_offset": 0,
+      "endline": 22,
+      "complexity": 1,
+      "methods": []
+    }
+  ],
+  "catalogo/api/serializers.py": [
+    {
+      "type": "class",
+      "rank": "B",
+      "lineno": 12,
+      "name": "TituloSerializer",
+      "col_offset": 0,
+      "endline": 44,
+      "complexity": 6,
+      "methods": [
+        {
+          "type": "method",
+          "rank": "A",
+          "lineno": 30,
+          "name": "validate",
+          "col_offset": 4,
+          "endline": 44,
+          "complexity": 5,
+          "classname": "TituloSerializer",
+          "closures": []
+        }
+      ]
+    },
+    {
+      "type": "method",
+      "rank": "A",
+      "lineno": 30,
+      "name": "validate",
+      "col_offset": 4,
+      "endline": 44,
+      "complexity": 5,
+      "classname": "TituloSerializer",
+      "closures": []
+    },
+    {
+      "type": "class",
+      "rank": "A",
+      "lineno": 6,
+      "name": "GeneroSerializer",
+      "col_offset": 0,
+      "endline": 6,
+      "complexity": 1,
+      "methods": []
+    }
+  ]
+}

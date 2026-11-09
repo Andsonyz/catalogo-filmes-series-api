@@ -316,3 +316,45 @@ A validação inicial da sugestão está no registro real [registro-teste-conver
 Preservado o nome `catalogo/teste.py`, incorporado nele o caso de borda e removida a cópia duplicada `catalogo/tests.py`. Acrescentado somente `teste.py` aos padrões de `pytest.ini`. Após a correção de descoberta, a suíte encontrou e aprovou 16 testes (15 da equipe e 1 herdado). O merge de atualização `ac3fa3d` preserva ambos os históricos; as evidências anteriores e o log acrescentado pela equipe foram mantidos. Esse problema de descoberta era de configuração do trabalho, não uma limitação do ambiente. Os nomes antigos nos registros históricos não foram reescritos como se os comandos tivessem sido executados com o nome novo.
 
 O README agora usa o caminho atual `catalogo/teste.py`. A nova validação, métricas e confirmação da integração são registradas abaixo após sua execução. O relatório final não faz parte desta etapa.
+
+## Duas métricas medidas e verificação em ambiente limpo
+
+**Revisão medida:** `1eeb4306ebcb2e5b94a0f818caa00a99228cd658`, branch `feat/catalogo-audiovisual`. Medição em 09/11/2026, em clone separado `/workspace/scratch/catalogo-verificacao-limpa`, Python 3.12.14, ambiente virtual novo. O banco herdado foi removido somente desse clone descartável, e todas as migrações foram aplicadas a um SQLite novo. Nenhum dado do checkout original foi removido.
+
+**Ferramentas:** coverage.py **7.6.12** e Radon **6.0.1**, instaladas com `venv/bin/python -m pip install -r requirements.txt -r requirements-metricas.txt`. As versões foram confirmadas por `venv/bin/python -m coverage --version` e `venv/bin/python -m radon --version`. Não houve falha das ferramentas nem necessidade de alternativa.
+
+**Escopo comum:** somente código de produção Python de `catalogo`: `models.py`, `apps.py`, `api/serializers.py`, `api/views.py` e inicializadores. Excluídos `catalogo/test*.py`, `catalogo/*test*.py` (incluem `teste.py` e o antigo `tests.py`) e `catalogo/migrations/*`. `users`, `config`, dependências e ambiente virtual ficam fora da medição. Testes são executados para exercitar o código, mas não entram no denominador de cobertura nem na análise de complexidade. Foram coletadas exatamente as duas métricas abaixo; não foi coletado índice de manutenibilidade, duplicação ou métrica independente de tamanho.
+
+### 1. Cobertura de linhas do código de produção
+
+```bash
+venv/bin/python -m coverage erase
+venv/bin/python -m coverage run -m pytest -v
+venv/bin/python -m coverage report -m
+```
+
+Configuração versionada em `.coveragerc`: `source = catalogo`, `branch = False`, caminhos relativos e as exclusões acima. A execução aprovou **16 testes** (15 da equipe e 1 herdado), com o aviso de depreciação já conhecido do `pytz`.
+
+**Resultado: 96,36%** — 53 de 55 linhas executáveis cobertas. `catalogo/api/serializers.py` e `catalogo/api/views.py` tiveram 100% de cobertura de linhas. As linhas 11 e 30 de `catalogo/models.py`, ambas `return self.nome` dos métodos `__str__`, ficaram descobertas. Exemplo coberto: o `raise ValidationError` para série sem temporadas em `TituloSerializer.validate`, exercitado pelo teste sugerido na revisão. JSON medido: [cobertura-catalogo.json](cobertura-catalogo.json), gerado com `venv/bin/python -m coverage json -o /workspace/catalogo-filmes-series-api/docs/cobertura-catalogo.json`.
+
+Interpretação: os testes executam a lógica de validação e os fluxos CRUD, mas 100% de linhas em um arquivo não garante todos os caminhos ou combinações de dados. Os métodos de representação textual não foram exercitados; não foram adicionados testes somente para elevar o percentual.
+
+### 2. Complexidade ciclomática
+
+```bash
+venv/bin/python -m radon cc catalogo -s -j -e 'catalogo/test*.py,catalogo/*test*.py,catalogo/migrations/*'
+```
+
+**Máximo entre funções/métodos: 5**, em `catalogo/api/serializers.py:30`, `TituloSerializer.validate` (classificação A do Radon). Os dois `__str__` medem 1. Resultado bruto completo: [complexidade-catalogo.json](complexidade-catalogo.json), extraído sem alteração dos valores da saída JSON registrada no log. O Radon também apresenta 6 para a classe `TituloSerializer` como bloco agregado sintético; esse valor não é de uma função ou método. O critério declarado para o máximo é comparar os blocos `type: method` ou `type: function`, não agregados de classes.
+
+A função tem uma trajetória inicial, dois `if` e dois operadores `and`, totalizando 5. Decide se um filme recebeu temporadas e se uma série ficou sem temporadas, após combinar os campos recebidos com o estado persistido. A concentração dessas decisões facilita localizar futuras mudanças, mas acrescentar tipos ou exceções aumenta os caminhos que precisam de testes. Ao alterar essa regra, revisar cadastro e PATCH nos dois sentidos, incluindo omissão e null explícito, em vez de duplicar a validação nas views.
+
+### Instruções confirmadas no clone limpo
+
+O log [registro-finalizacao.log](registro-finalizacao.log) contém comandos, revisão, instalação, versões e saídas reais. Nesse ambiente foram confirmados: instalação sem dependências quebradas (`pip check`), migrações completas, `manage.py check`, teste específico **1 passed**, suíte sob coverage **16 passed**, inicialização do servidor com `manage.py runserver 127.0.0.1:8000 --noreload` e os exemplos Bash extraídos literalmente do README. O filme retornou **201** com temporadas nulas e a requisição inválida **400** com a mensagem esperada. Swagger e schema retornaram **200**. A obtenção de token com usuário descartável e a consulta com esse token retornaram **200**; credenciais e token foram omitidos do log. O servidor foi encerrado com Ctrl+C.
+
+Os comandos Windows/PowerShell foram documentados com `py -3.12`, o executável `venv\Scripts\python.exe` e `Invoke-RestMethod`. Este ambiente é Linux: não se afirma execução nativa de PowerShell/Windows. Isso limita apenas a verificação nessa plataforma; as instruções Linux foram executadas em ambiente limpo. O SHA-256 do SQLite original permanece `6e4b87abfa1f50121cd3a63866e8026e0ee5e4ee7600badc5c51a380bade7c10`, preservando a alteração local preexistente fora dos commits.
+
+### Regras e preparação da integração
+
+Destino confirmado no GitHub: `Andsonyz/catalogo-filmes-series-api`, público, branch padrão `main`. Em 09/11/2026, `gh api repos/Andsonyz/catalogo-filmes-series-api/branches/main` informou `protected: false`, e a consulta a `/rulesets` retornou lista vazia. O repositório permite merge commits. Será utilizado PR de `feat/catalogo-audiovisual` para `main`, com merge commit para preservar os commits individuais, sem reescrever histórico. A confirmação do merge e os testes na revisão integrada serão registrados após sua execução. Não foi redigido relatório.
