@@ -217,3 +217,28 @@ class CatalogoAPITests(APITestCase):
         titulo.refresh_from_db()
         self.assertEqual(titulo.tipo, "serie")
         self.assertEqual(titulo.numero_temporadas, 2)
+
+
+    def test_patch_rejeita_conversao_para_serie_sem_informar_temporadas(self):
+        titulo = Titulo.objects.create(
+            nome="Filme do teste", tipo="filme", genero=self.genero
+        )
+
+        response = self.client.patch(
+            reverse("titulos-detail", args=[titulo.pk]),
+            {"tipo": "serie"},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("numero_temporadas", response.data)
+        self.assertIn(
+            "Séries exigem um número inteiro de temporadas maior ou igual a 1",
+            str(response.data["numero_temporadas"][0]),
+        )
+        titulo.refresh_from_db()
+        self.assertEqual(titulo.tipo, "filme")
+        self.assertIsNone(titulo.numero_temporadas)
+        self.assertEqual(titulo.nome, "Filme do teste")
+        self.assertEqual(titulo.genero_id, self.genero.pk)
+        self.assertEqual(Titulo.objects.count(), 1)

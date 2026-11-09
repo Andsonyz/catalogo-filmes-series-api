@@ -259,3 +259,23 @@ Não houve teste falhando nem erro de configuração/ambiente. Foi emitido um `D
 O arquivo `db.sqlite3` já estava modificado desde as migrações da etapa anterior. Seu SHA-256 antes e depois destas execuções foi o mesmo: `6e4b87abfa1f50121cd3a63866e8026e0ee5e4ee7600badc5c51a380bade7c10`. Essa alteração local preexistente foi preservada e não integra o commit de testes.
 
 Esta etapa encerra com testes, log e evidências em novo commit descritivo. Não foram iniciadas métricas, análise acadêmica de IA ou relatório final, nem realizado merge.
+
+
+## Melhoria após revisão dos testes — conversão inversa
+
+Em 09/11/2026, a revisão sugeriu cobrir o caso ainda ausente: PATCH de filme para série sem informar temporadas. Após autorização do solicitante, foi adicionado em `catalogo/tests.py` o teste independente `test_patch_rejeita_conversao_para_serie_sem_informar_temporadas`.
+
+O teste cria seu próprio filme e envia exatamente `{"tipo":"serie"}`. Confere HTTP 400 e mensagem de erro em `numero_temporadas`. Após `refresh_from_db()`, exige `tipo == "filme"` e temporadas nulas, além de nome, gênero e contagem preservados. Não foi necessária alteração na API: a validação existente já rejeitava essa combinação corretamente.
+
+### Verificação real da melhoria
+
+| Comando | Resultado | Saída |
+| --- | --- | --- |
+| `venv/bin/python -m pytest catalogo/tests.py::CatalogoAPITests::test_patch_rejeita_conversao_para_serie_sem_informar_temporadas -v` | **1 passed, 1 warning in 0.40s** | 0 |
+| `venv/bin/python -m pytest catalogo/tests.py -v` | **15 passed, 1 warning in 0.36s** | 0 |
+| `venv/bin/python -m pytest -v` | **16 passed, 1 warning in 0.35s** | 0 |
+| `git diff --check` | Sem problemas | 0 |
+
+Contagem atualizada: **15 testes da equipe + 1 herdado = 16 testes**. Os resultados da rodada anterior continuam registrados acima. O único aviso permanece o `DeprecationWarning` da dependência `pytz`; não houve falha nem impedimento do ambiente. As três execuções passaram na primeira tentativa, sem correções adicionais.
+
+Comandos, horários UTC e saídas completas estão em [registro-teste-conversao.log](registro-teste-conversao.log). O SHA-256 do SQLite local permaneceu `6e4b87abfa1f50121cd3a63866e8026e0ee5e4ee7600badc5c51a380bade7c10`, idêntico ao início da rodada. A alteração local preexistente do banco foi preservada e fica fora do commit. Branch mantida: `feat/catalogo-audiovisual`.
