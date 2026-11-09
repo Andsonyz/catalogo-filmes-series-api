@@ -1,0 +1,12 @@
+[run]
+source = catalogo
+branch = False
+relative_files = True
+omit =
+    catalogo/test*.py
+    catalogo/*test*.py
+    catalogo/migrations/*
+
+[report]
+precision = 2
+show_missing = True
