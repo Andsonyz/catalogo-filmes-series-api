@@ -10,6 +10,21 @@ API implementada sobre o Django Quick Project, com Django REST Framework e SQLit
 
 O catálogo possui `Genero` e `Titulo`, relacionados por chave estrangeira. Oferece cadastro e consulta de gêneros e CRUD completo de títulos. Filmes têm `numero_temporadas` nulo; séries exigem um inteiro maior ou igual a 1, tanto no cadastro quanto na atualização. O título previsto para o relatório de entrega é **Cadastro de filmes e séries — Unidade 02**.
 
+## Interface web complementar
+
+Abra **<http://127.0.0.1:8000/catalogo/>** após executar `venv/bin/python manage.py runserver`. A página usa o mesmo Django da API, com templates, CSS e JavaScript nativo, sem build.
+
+1. Use **Novo gênero** para começar mesmo com banco vazio.
+2. Adicione um filme e uma série de duas temporadas.
+3. Edite só o nome da série e confira as temporadas. Depois escolha Filme e salve: a tela envia `numero_temporadas: null` no mesmo PATCH. Recarregue para conferir.
+4. Experimente cancelar e confirmar a exclusão. Erros da API/conexão são exibidos sem apagar os dados do formulário.
+
+As permissões `AllowAny` da base foram mantidas. Uma sessão autenticada é respeitada com cookies de mesma origem e `X-CSRFToken`; nenhum mecanismo de autenticação foi substituído.
+
+Para demonstrar com **banco descartável**, execute `venv/bin/python scripts/servir_interface_descartavel.py --port 8010` e abra <http://127.0.0.1:8010/catalogo/>. O SQLite temporário é removido ao encerrar esse servidor. No PowerShell, use `.\venv\Scripts\python.exe` no lugar de `venv/bin/python`.
+
+A suíte completa (`venv/bin/python -m pytest -v`) inclui os testes da API em `catalogo/teste.py` e os testes de página/CSRF em `catalogo/test_interface.py`. Verificação real, screenshots e reprodução estão em [docs/interface.md](docs/interface.md).
+
 ## Executar a base
 
 Reproduzido com Python 3.12.14 no Linux:

@@ -279,3 +279,11 @@ O teste cria seu próprio filme e envia exatamente `{"tipo":"serie"}`. Confere H
 Contagem atualizada: **15 testes da equipe + 1 herdado = 16 testes**. Os resultados da rodada anterior continuam registrados acima. O único aviso permanece o `DeprecationWarning` da dependência `pytz`; não houve falha nem impedimento do ambiente. As três execuções passaram na primeira tentativa, sem correções adicionais.
 
 Comandos, horários UTC e saídas completas estão em [registro-teste-conversao.log](registro-teste-conversao.log). O SHA-256 do SQLite local permaneceu `6e4b87abfa1f50121cd3a63866e8026e0ee5e4ee7600badc5c51a380bade7c10`, idêntico ao início da rodada. A alteração local preexistente do banco foi preservada e fica fora do commit. Branch mantida: `feat/catalogo-audiovisual`.
+
+## Reaplicação da interface web para novo PR
+
+Após o PR #4 ter sido aceito, a `main` foi movida no GitHub para `33dc79b`, sem a interface. Em atendimento ao novo pedido, criada `feat/interface-catalogo-reaplicacao` a partir dessa revisão atual. Reaplicado o commit funcional como `0b5c876`, preservando as branches anteriores e a alteração local do SQLite, sem force push.
+
+A página `/catalogo/` foi novamente verificada com dados descartáveis no Chromium, em desktop e celular: cadastro de gênero/filme/série, preservação de duas temporadas ao renomear, conversão com null explícito persistida após recarga, cancelamento e confirmação da exclusão, erro 400 junto ao campo e preservação de preenchimento em falha de conexão. Detalhes, novas capturas e logs em [interface.md](interface.md).
+
+`manage.py check` passou, `makemigrations --check --dry-run` não encontrou mudanças e a suíte aprovou **18 testes**, com apenas o aviso herdado de depreciação do pytz. Mantido `catalogo/teste.py` da equipe e incluído seu nome na descoberta do pytest. Nenhum model, serializer ou endpoint de API foi alterado. O novo PR será aberto contra `main` para avaliação, sem merge pelo agente.
