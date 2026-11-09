@@ -6,6 +6,23 @@ API REST da disciplina PEX1277 — Manutenção de Software, UFERSA. O objetivo 
 
 **Repositório:** <https://github.com/Andsonyz/catalogo-filmes-series-api>. Base Django Quick Project: <https://github.com/lisa-ufersa/django-quickproject>, com histórico preservado. Django REST Framework e SQLite; sem serviços externos de banco.
 
+## Interface web complementar
+
+A página está em **<http://127.0.0.1:8000/catalogo/>** e funciona com o mesmo `manage.py runserver` da API, usando templates Django, CSS e JavaScript nativo. Não há etapa de build nem instalação de dependências de frontend.
+
+Roteiro de demonstração:
+
+1. Abra `/catalogo/`, clique em **Novo gênero** e cadastre um gênero.
+2. Cadastre um filme e uma série com duas temporadas. O campo de temporadas aparece somente para séries.
+3. Clique em **Editar** na série, altere só o nome e salve: as duas temporadas são preservadas. Edite novamente, escolha Filme e salve: a tela envia `numero_temporadas: null` no mesmo PATCH. Recarregue para conferir.
+4. Clique em **Excluir**, experimente cancelar e depois confirmar. O sucesso só é informado após a confirmação da API. Erros preservam o preenchimento e são mostrados junto aos campos.
+
+A página mantém `AllowAny` da API. Se houver sessão autenticada, as requisições usam os cookies da mesma origem e o token CSRF emitido pelo Django. Não foi criada uma tela de login ou um novo mecanismo de autenticação.
+
+Para experimentar com banco totalmente descartável, sem tocar nos dados da equipe, use `venv/bin/python scripts/servir_interface_descartavel.py --port 8010` (Windows: `.\venv\Scripts\python.exe scripts/servir_interface_descartavel.py --port 8010`) e abra <http://127.0.0.1:8010/catalogo/>. Ao encerrar esse servidor, o banco temporário é descartado. O servidor normal continua usando o SQLite configurado no projeto.
+
+[Cenários e comandos reais de verificação](docs/interface.md) · [Captura desktop](docs/interface/desktop.png) · [Captura celular](docs/interface/celular.png).
+
 ## Entidades e regra
 
 - `Genero`: `id` e `nome`.
@@ -90,7 +107,7 @@ A última chamada gera um erro HTTP 400 esperado no PowerShell. Estes exemplos c
 
 ## Testes automatizados
 
-`APITestCase` do DRF, integrado ao pytest-django. Arquivo da equipe: `catalogo/teste.py`, descoberto explicitamente pelo padrão em `pytest.ini`. São 15 testes da equipe e 1 teste demonstrativo herdado de `users`, total de 16. As verificações incluem HTTP 400, mensagem, ausência de gravação, `refresh_from_db()` após PATCH rejeitado e conversão válida com null.
+`APITestCase` do DRF, integrado ao pytest-django. Arquivo da equipe: `catalogo/teste.py`, descoberto explicitamente pelo padrão em `pytest.ini`. O núcleo da API possui 15 testes da equipe e 1 teste demonstrativo herdado de `users`; a interface acrescenta 2 testes de página/CSRF em `catalogo/test_interface.py`. A suíte completa totaliza 18 testes. As verificações incluem HTTP 400, mensagem, ausência de gravação, `refresh_from_db()` após PATCH rejeitado e conversão válida com null.
 
 ```bash
 venv/bin/python -m pytest catalogo/teste.py -v

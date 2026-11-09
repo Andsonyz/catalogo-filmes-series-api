@@ -1,0 +1,67 @@
+
+UTC: 2026-11-09T16:52:19.483079+00:00
+$ git rev-parse HEAD
+b5d9e9ee97c852fa9fd1ca1a538f14d858ce402b
+exit_code=0
+
+UTC: 2026-11-09T16:52:19.486797+00:00
+$ venv/bin/python manage.py check
+System check identified no issues (0 silenced).
+exit_code=0
+
+UTC: 2026-11-09T16:52:19.942478+00:00
+$ venv/bin/python manage.py makemigrations --check --dry-run
+No changes detected
+exit_code=0
+
+UTC: 2026-11-09T16:52:20.415234+00:00
+$ venv/bin/python -m pytest -v
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-8.1.1, pluggy-1.4.0 -- /workspace/catalogo-filmes-series-api/venv/bin/python
+cachedir: .pytest_cache
+django: version: 4.2.3, settings: config.settings (from ini)
+rootdir: /workspace/catalogo-filmes-series-api
+configfile: pytest.ini
+plugins: django-4.8.0
+collecting ... collected 18 items
+
+catalogo/test_interface.py::PaginaCatalogoTests::test_pagina_renderiza_e_prepara_csrf_para_o_javascript PASSED [  5%]
+catalogo/test_interface.py::PaginaCatalogoTests::test_sessao_autenticada_requer_csrf_e_aceita_o_token_da_pagina PASSED [ 11%]
+catalogo/teste.py::CatalogoAPITests::test_cadastra_filme_sem_temporadas PASSED [ 16%]
+catalogo/teste.py::CatalogoAPITests::test_cadastra_genero PASSED         [ 22%]
+catalogo/teste.py::CatalogoAPITests::test_cadastra_serie_com_duas_temporadas PASSED [ 27%]
+catalogo/teste.py::CatalogoAPITests::test_consulta_genero PASSED         [ 33%]
+catalogo/teste.py::CatalogoAPITests::test_consulta_titulo PASSED         [ 38%]
+catalogo/teste.py::CatalogoAPITests::test_exclui_titulo PASSED           [ 44%]
+catalogo/teste.py::CatalogoAPITests::test_lista_titulos PASSED           [ 50%]
+catalogo/teste.py::CatalogoAPITests::test_patch_converte_serie_para_filme_com_temporadas_null PASSED [ 55%]
+catalogo/teste.py::CatalogoAPITests::test_patch_nome_preserva_temporadas_omitidas PASSED [ 61%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_filme_sem_limpar_temporadas PASSED [ 66%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_serie_sem_informar_temporadas PASSED [ 72%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_temporadas_null_mantendo_serie PASSED [ 77%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_filme_com_temporadas PASSED [ 83%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_serie_com_zero_temporadas PASSED [ 88%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_serie_sem_campo_temporadas PASSED [ 94%]
+users/tests.py::UserTestCase::test_user PASSED                           [100%]
+
+=============================== warnings summary ===============================
+venv/lib/python3.12/site-packages/pytz/tzinfo.py:27
+  /workspace/catalogo-filmes-series-api/venv/lib/python3.12/site-packages/pytz/tzinfo.py:27: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+    _epoch = datetime.utcfromtimestamp(0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 18 passed, 1 warning in 0.41s =========================
+exit_code=0
+
+UTC: 2026-11-09T16:52:21.350726+00:00
+$ node --check catalogo/static/catalogo/catalogo.js
+exit_code=0
+
+UTC: 2026-11-09T16:52:21.389649+00:00
+$ git diff --check
+exit_code=0
+
+UTC: 2026-11-09T16:52:21.393957+00:00
+$ sha256sum db.sqlite3
+6e4b87abfa1f50121cd3a63866e8026e0ee5e4ee7600badc5c51a380bade7c10  db.sqlite3
+exit_code=0
