@@ -91,4 +91,4 @@ O SQLite original da equipe manteve o SHA-256 `6e4b87abfa1f50121cd3a63866e8026e0
 
 ![Celular](interface/celular.png)
 
-A alteração será entregue por PR contra `main` e deve permanecer aberta para revisão da interface. Não realizar merge nesta etapa.
+A alteração foi publicada em <https://github.com/Andsonyz/catalogo-filmes-series-api/pull/4>, de `feat/interface-catalogo` para `main`, com o título **Adiciona interface web ao catálogo de filmes e séries**. O GitHub confirmou `state: OPEN` e `mergedAt: null`. O PR deve permanecer aberto para revisão da interface; não foi realizado merge. Os servidores de QA foram encerrados, os dados/sessão descartáveis foram removidos e o servidor normal foi iniciado com `config.settings` em <http://127.0.0.1:8000/catalogo/>.
