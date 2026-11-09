@@ -1,3 +1,4 @@
+Registro de comandos reais; espaços finais normalizados para versionamento.
 
 UTC: 2026-11-09T16:28:01.481570+00:00
 cwd: /workspace/scratch
@@ -387,5 +388,121 @@ venv/lib/python3.12/site-packages/pytz/tzinfo.py:27
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 ======================== 16 passed, 1 warning in 0.37s =========================
+
+exit_code=0
+
+UTC: 2026-11-09T16:32:01.936602+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ gh pr view 3 --repo Andsonyz/catalogo-filmes-series-api --json url,state,baseRefName,headRefName,headRefOid,mergedAt,mergeCommit
+{"baseRefName":"main","headRefName":"feat/catalogo-audiovisual","headRefOid":"4cc8f7f45378cbb0b195e266c2967534b0418767","mergeCommit":{"oid":"1c1815a2d8145dff2bb06a3c93823bd27f953cf0"},"mergedAt":"2026-11-09T16:31:34Z","state":"MERGED","url":"https://github.com/Andsonyz/catalogo-filmes-series-api/pull/3"}
+
+exit_code=0
+
+UTC: 2026-11-09T16:32:02.969059+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ git remote set-url origin https://github.com/Andsonyz/catalogo-filmes-series-api.git
+
+exit_code=0
+
+UTC: 2026-11-09T16:32:03.006046+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ git fetch origin main
+From https://github.com/Andsonyz/catalogo-filmes-series-api
+ * branch            main       -> FETCH_HEAD
+
+exit_code=0
+
+UTC: 2026-11-09T16:32:03.954260+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ git switch --detach FETCH_HEAD
+HEAD is now at 1c1815a Merge PR #3: evidências de IA, métricas e reprodução do catálogo
+M	db.sqlite3
+
+exit_code=0
+
+UTC: 2026-11-09T16:32:04.001430+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ git rev-parse HEAD HEAD:catalogo 1eeb430:catalogo
+1c1815a2d8145dff2bb06a3c93823bd27f953cf0
+ab3283e54620bf5f022a3f57492ed44039a5a7ad
+ab3283e54620bf5f022a3f57492ed44039a5a7ad
+
+exit_code=0
+
+UTC: 2026-11-09T16:32:04.037682+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ git show --no-patch --format=raw HEAD
+commit 1c1815a2d8145dff2bb06a3c93823bd27f953cf0
+tree 9bfac50f272acaa32a20fba552ee8d19e8ff4079
+parent 33dc79be6c6dc520836d3b037d112866dd831a78
+parent 4cc8f7f45378cbb0b195e266c2967534b0418767
+author Andson Rocha <antonioandson1307@gmail.com> 1794241894 -0300
+committer GitHub <noreply@github.com> 1794241894 -0300
+gpgsig -----BEGIN PGP SIGNATURE-----
+
+ wsFcBAABCAAQBQJq8fVmCRC1aQ7uu5UhlAAATOYQACX42Yfm6J/zMTJaOUkABHZz
+ qr5O5sBUNALpC4nh6G52HIAJWNvHKsUQ+v+ocboyHfb9yUuasbEFAHjy9oq2eezJ
+ bK97wijYMYgrBgWYQS++CALtaEyxRLq3D8FpircTAYVC5j3TPP+Gs++Q5tXaI8+V
+ tPV7oHFOtsK8QzM7AJcnpxnivazcXMJmoRtuwSQCYCQxt+gvF8M4FfP4S/SXpb1W
+ XmghGSWr2p9GbwjOoLqT23hZlsMntxwkAklQQ7VLQn3fLf+1GJD518touWmq8OxM
+ YlqjdbtVLR0XFVMpSptTmrnxzeBfWZJhRo9Af1yJdVrIWomImx/Q0YLV+FvD74HU
+ j0CuSqa5OBN3mNSYoUh5HwoGG7+uL94xLkaneYGfcMFcF6r0e3r5z8rES3xS64yr
+ 1rDZtCEd12nk+J78QnAQ1I1H78wkOjo+ah0x5Z4+4okXQzuUHw8V/NSCfXEHAhGY
+ Ws1B5Zd/SDhEXzJx7DNGODLgRngAxH1ififtgbHg7YNIAg7coQPSjKQ6krOtZiOh
+ xLy0jjImr9ru3uUPSlcHsgrp/YhnLOeP/iMaWtrvQECF4GaT3IUAWTpSVlBQiEcB
+ PRRlCJmWX4ALfj3qqv/xMlMoFz6O3KmsjGs30JlnGHGc7I0wDRdrLL8DUZVEeqQV
+ rPS8REjGJQJHc/hmNiMX
+ =0Yli
+ -----END PGP SIGNATURE-----
+
+
+    Merge PR #3: evidências de IA, métricas e reprodução do catálogo
+
+    Conclui evidências de IA, métricas e reprodução do catálogo
+
+exit_code=0
+
+UTC: 2026-11-09T16:32:04.075035+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ git diff --exit-code 1eeb430 HEAD -- catalogo config .coveragerc pytest.ini requirements.txt requirements-metricas.txt
+
+exit_code=0
+
+UTC: 2026-11-09T16:32:04.112507+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python -m pytest -v
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-8.1.1, pluggy-1.4.0 -- /workspace/scratch/catalogo-verificacao-limpa/venv/bin/python
+cachedir: .pytest_cache
+django: version: 4.2.3, settings: config.settings (from ini)
+rootdir: /workspace/scratch/catalogo-verificacao-limpa
+configfile: pytest.ini
+plugins: django-4.8.0
+collecting ... collected 16 items
+
+catalogo/teste.py::CatalogoAPITests::test_cadastra_filme_sem_temporadas PASSED [  6%]
+catalogo/teste.py::CatalogoAPITests::test_cadastra_genero PASSED         [ 12%]
+catalogo/teste.py::CatalogoAPITests::test_cadastra_serie_com_duas_temporadas PASSED [ 18%]
+catalogo/teste.py::CatalogoAPITests::test_consulta_genero PASSED         [ 25%]
+catalogo/teste.py::CatalogoAPITests::test_consulta_titulo PASSED         [ 31%]
+catalogo/teste.py::CatalogoAPITests::test_exclui_titulo PASSED           [ 37%]
+catalogo/teste.py::CatalogoAPITests::test_lista_titulos PASSED           [ 43%]
+catalogo/teste.py::CatalogoAPITests::test_patch_converte_serie_para_filme_com_temporadas_null PASSED [ 50%]
+catalogo/teste.py::CatalogoAPITests::test_patch_nome_preserva_temporadas_omitidas PASSED [ 56%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_filme_sem_limpar_temporadas PASSED [ 62%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_serie_sem_informar_temporadas PASSED [ 68%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_temporadas_null_mantendo_serie PASSED [ 75%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_filme_com_temporadas PASSED [ 81%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_serie_com_zero_temporadas PASSED [ 87%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_serie_sem_campo_temporadas PASSED [ 93%]
+users/tests.py::UserTestCase::test_user PASSED                           [100%]
+
+=============================== warnings summary ===============================
+venv/lib/python3.12/site-packages/pytz/tzinfo.py:27
+  /workspace/scratch/catalogo-verificacao-limpa/venv/lib/python3.12/site-packages/pytz/tzinfo.py:27: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+    _epoch = datetime.utcfromtimestamp(0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 16 passed, 1 warning in 0.38s =========================
 
 exit_code=0

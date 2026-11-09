@@ -360,3 +360,20 @@ Os comandos Windows/PowerShell foram documentados com `py -3.12`, o executável 
 Destino confirmado no GitHub: `Andsonyz/catalogo-filmes-series-api`, público, branch padrão `main`. Em 09/11/2026, `gh api repos/Andsonyz/catalogo-filmes-series-api/branches/main` informou `protected: false`, e a consulta a `/rulesets` retornou lista vazia. O repositório permite merge commits. Será utilizado PR de `feat/catalogo-audiovisual` para `main`, com merge commit para preservar os commits individuais, sem reescrever histórico. A confirmação do merge e os testes na revisão integrada serão registrados após sua execução. Não foi redigido relatório.
 
 Durante a preparação do PR #3, a equipe publicou `33dc79b` na `main`, acrescentando o mesmo teste de conversão inversa e sua evidência. A atualização foi incorporada à branch antes do merge final. Os conflitos eram sobreposição do mesmo teste/log e espaços/fim de linha; foi preservado um único teste com todas as asserções e a evidência histórica mais completa. Nenhuma regra de produção mudou. Ambos os commits de origem permanecem no histórico.
+
+## Integração confirmada no GitHub e validação final
+
+- Repositório: <https://github.com/Andsonyz/catalogo-filmes-series-api>.
+- PR: <https://github.com/Andsonyz/catalogo-filmes-series-api/pull/3>.
+- Origem: `feat/catalogo-audiovisual`, revisão `4cc8f7f45378cbb0b195e266c2967534b0418767`; destino: branch padrão `main`.
+- GitHub confirmou `state: MERGED`, `mergedAt: 2026-11-09T16:31:34Z` (09/11/2026 às 13h31min34s, America/Fortaleza).
+- Commit integrado: **`1c1815a2d8145dff2bb06a3c93823bd27f953cf0`**. Possui os pais `33dc79be6c6dc520836d3b037d112866dd831a78` e `4cc8f7f45378cbb0b195e266c2967534b0418767`, comprovando merge commit e preservação dos históricos. Não houve squash, rebase ou force push.
+- Antes de integrar, foram conferidos destino, permissões, ausência de proteção/rulesets e checks obrigatórios. O GitHub permitiu o merge normal; nenhum bypass foi utilizado. O conflito inicialmente informado pelo PR foi resolvido incorporando o trabalho concorrente da equipe, antes do merge.
+
+Após a integração, o clone de verificação buscou a `main` diretamente do GitHub com `git fetch origin main` e selecionou `FETCH_HEAD`. `git rev-parse HEAD` confirmou o commit integrado acima. Nessa revisão, **`venv/bin/python -m pytest -v` retornou `16 passed, 1 warning in 0.38s`, código 0**: 15 testes da equipe e 1 herdado. O único aviso continua sendo a depreciação de `pytz`.
+
+O comando `git diff --exit-code 1eeb430 HEAD -- catalogo config .coveragerc pytest.ini requirements.txt requirements-metricas.txt`, executado no clone integrado, terminou com saída vazia e código 0. A árvore Git `catalogo` tem o mesmo hash nas duas revisões: `ab3283e54620bf5f022a3f57492ed44039a5a7ad`. Portanto, código medido, testes e configuração de medição não mudaram entre a revisão medida e a integrada; **não foi necessário repetir as métricas**. Mantêm-se cobertura de linhas **96,36%** e complexidade máxima entre funções/métodos **5** em `TituloSerializer.validate`.
+
+Comandos e respostas reais da confirmação no GitHub e da execução integrada foram acrescentados a [registro-finalizacao.log](registro-finalizacao.log). A confirmação posterior ao merge recebe um commit exclusivamente documental na `main`, permitida pelas regras verificadas, sem alteração no código medido. A branch de funcionalidade é preservada. O banco local original continua com sua alteração preexistente, sem entrar nos commits.
+
+O README atual contém o tema, objetivo, entidades, regra, instalação, migrações, inicialização, autenticação, rotas, sucesso/rejeição, testes e reprodução das duas métricas, com variantes PowerShell. A pergunta e a resposta reais da IA, a decisão técnica e a validação estão separadas neste documento. **O relatório final não foi redigido; a etapa termina aqui.**
