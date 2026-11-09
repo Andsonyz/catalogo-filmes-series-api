@@ -1,0 +1,391 @@
+
+UTC: 2026-11-09T16:28:01.481570+00:00
+cwd: /workspace/scratch
+$ git clone --no-local --single-branch --branch feat/catalogo-audiovisual /workspace/catalogo-filmes-series-api /workspace/scratch/catalogo-verificacao-limpa
+Cloning into '/workspace/scratch/catalogo-verificacao-limpa'...
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:01.590191+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ git rev-parse HEAD
+1eeb4306ebcb2e5b94a0f818caa00a99228cd658
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:01.626725+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ python3 -m venv venv
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:03.975970+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python -m pip install -r requirements.txt -r requirements-metricas.txt
+Collecting asgiref==3.7.2 (from -r requirements.txt (line 1))
+  Using cached asgiref-3.7.2-py3-none-any.whl.metadata (9.2 kB)
+Collecting attrs==23.1.0 (from -r requirements.txt (line 2))
+  Using cached attrs-23.1.0-py3-none-any.whl.metadata (11 kB)
+Collecting Django==4.2.3 (from -r requirements.txt (line 3))
+  Using cached Django-4.2.3-py3-none-any.whl.metadata (4.1 kB)
+Collecting djangorestframework==3.14.0 (from -r requirements.txt (line 4))
+  Using cached djangorestframework-3.14.0-py3-none-any.whl.metadata (10 kB)
+Collecting drf-spectacular==0.26.4 (from -r requirements.txt (line 5))
+  Using cached drf_spectacular-0.26.4-py3-none-any.whl.metadata (13 kB)
+Collecting drf-yasg==1.21.7 (from -r requirements.txt (line 6))
+  Using cached drf_yasg-1.21.7-py3-none-any.whl.metadata (16 kB)
+Collecting exceptiongroup==1.2.0 (from -r requirements.txt (line 7))
+  Using cached exceptiongroup-1.2.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting inflection==0.5.1 (from -r requirements.txt (line 8))
+  Using cached inflection-0.5.1-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting iniconfig==2.0.0 (from -r requirements.txt (line 9))
+  Using cached iniconfig-2.0.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting jsonschema==4.19.0 (from -r requirements.txt (line 10))
+  Using cached jsonschema-4.19.0-py3-none-any.whl.metadata (8.2 kB)
+Collecting jsonschema-specifications==2023.7.1 (from -r requirements.txt (line 11))
+  Using cached jsonschema_specifications-2023.7.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting packaging==23.1 (from -r requirements.txt (line 12))
+  Using cached packaging-23.1-py3-none-any.whl.metadata (3.1 kB)
+Collecting pluggy==1.4.0 (from -r requirements.txt (line 13))
+  Using cached pluggy-1.4.0-py3-none-any.whl.metadata (4.3 kB)
+Collecting pytest==8.1.1 (from -r requirements.txt (line 14))
+  Using cached pytest-8.1.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting pytest-django==4.8.0 (from -r requirements.txt (line 15))
+  Using cached pytest_django-4.8.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting pytz==2023.3 (from -r requirements.txt (line 16))
+  Using cached pytz-2023.3-py2.py3-none-any.whl.metadata (22 kB)
+Collecting PyYAML==6.0.1 (from -r requirements.txt (line 17))
+  Using cached PyYAML-6.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+Collecting referencing==0.30.2 (from -r requirements.txt (line 18))
+  Using cached referencing-0.30.2-py3-none-any.whl.metadata (2.6 kB)
+Collecting rpds-py==0.30.0 (from -r requirements.txt (line 19))
+  Using cached rpds_py-0.30.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+Collecting sqlparse==0.4.4 (from -r requirements.txt (line 20))
+  Using cached sqlparse-0.4.4-py3-none-any.whl.metadata (4.0 kB)
+Collecting tomli==2.0.1 (from -r requirements.txt (line 21))
+  Using cached tomli-2.0.1-py3-none-any.whl.metadata (8.9 kB)
+Collecting typing_extensions==4.7.1 (from -r requirements.txt (line 22))
+  Using cached typing_extensions-4.7.1-py3-none-any.whl.metadata (3.1 kB)
+Collecting uritemplate==4.1.1 (from -r requirements.txt (line 23))
+  Using cached uritemplate-4.1.1-py2.py3-none-any.whl.metadata (2.9 kB)
+Collecting coverage==7.6.12 (from -r requirements-metricas.txt (line 1))
+  Using cached coverage-7.6.12-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (8.5 kB)
+Collecting radon==6.0.1 (from -r requirements-metricas.txt (line 2))
+  Using cached radon-6.0.1-py2.py3-none-any.whl.metadata (8.2 kB)
+Collecting mando<0.8,>=0.6 (from radon==6.0.1->-r requirements-metricas.txt (line 2))
+  Using cached mando-0.7.1-py2.py3-none-any.whl.metadata (7.4 kB)
+Collecting colorama>=0.4.1 (from radon==6.0.1->-r requirements-metricas.txt (line 2))
+  Using cached colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+Collecting six (from mando<0.8,>=0.6->radon==6.0.1->-r requirements-metricas.txt (line 2))
+  Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Using cached asgiref-3.7.2-py3-none-any.whl (24 kB)
+Using cached attrs-23.1.0-py3-none-any.whl (61 kB)
+Using cached Django-4.2.3-py3-none-any.whl (8.0 MB)
+Using cached djangorestframework-3.14.0-py3-none-any.whl (1.1 MB)
+Using cached drf_spectacular-0.26.4-py3-none-any.whl (93 kB)
+Using cached drf_yasg-1.21.7-py3-none-any.whl (4.3 MB)
+Using cached exceptiongroup-1.2.0-py3-none-any.whl (16 kB)
+Using cached inflection-0.5.1-py2.py3-none-any.whl (9.5 kB)
+Using cached iniconfig-2.0.0-py3-none-any.whl (5.9 kB)
+Using cached jsonschema-4.19.0-py3-none-any.whl (83 kB)
+Using cached jsonschema_specifications-2023.7.1-py3-none-any.whl (17 kB)
+Using cached packaging-23.1-py3-none-any.whl (48 kB)
+Using cached pluggy-1.4.0-py3-none-any.whl (20 kB)
+Using cached pytest-8.1.1-py3-none-any.whl (337 kB)
+Using cached pytest_django-4.8.0-py3-none-any.whl (23 kB)
+Using cached pytz-2023.3-py2.py3-none-any.whl (502 kB)
+Using cached PyYAML-6.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (724 kB)
+Using cached referencing-0.30.2-py3-none-any.whl (25 kB)
+Using cached rpds_py-0.30.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (394 kB)
+Using cached sqlparse-0.4.4-py3-none-any.whl (41 kB)
+Using cached tomli-2.0.1-py3-none-any.whl (12 kB)
+Using cached typing_extensions-4.7.1-py3-none-any.whl (33 kB)
+Using cached uritemplate-4.1.1-py2.py3-none-any.whl (10 kB)
+Using cached coverage-7.6.12-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (242 kB)
+Using cached radon-6.0.1-py2.py3-none-any.whl (52 kB)
+Using cached colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Using cached mando-0.7.1-py2.py3-none-any.whl (28 kB)
+Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Installing collected packages: pytz, uritemplate, typing_extensions, tomli, sqlparse, six, rpds-py, PyYAML, pluggy, packaging, iniconfig, inflection, exceptiongroup, coverage, colorama, attrs, asgiref, referencing, pytest, mando, Django, radon, pytest-django, jsonschema-specifications, djangorestframework, jsonschema, drf-yasg, drf-spectacular
+Successfully installed Django-4.2.3 PyYAML-6.0.1 asgiref-3.7.2 attrs-23.1.0 colorama-0.4.6 coverage-7.6.12 djangorestframework-3.14.0 drf-spectacular-0.26.4 drf-yasg-1.21.7 exceptiongroup-1.2.0 inflection-0.5.1 iniconfig-2.0.0 jsonschema-4.19.0 jsonschema-specifications-2023.7.1 mando-0.7.1 packaging-23.1 pluggy-1.4.0 pytest-8.1.1 pytest-django-4.8.0 pytz-2023.3 radon-6.0.1 referencing-0.30.2 rpds-py-0.30.0 six-1.17.0 sqlparse-0.4.4 tomli-2.0.1 typing_extensions-4.7.1 uritemplate-4.1.1
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: python -m pip install --upgrade pip
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:27.863001+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python -c 'from pathlib import Path; p=Path("db.sqlite3"); p.unlink(); print("Removido somente o banco herdado do clone descartável; próximo migrate cria SQLite novo.")'
+Removido somente o banco herdado do clone descartável; próximo migrate cria SQLite novo.
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:27.921682+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python manage.py migrate --noinput
+Operations to perform:
+  Apply all migrations: admin, auth, authtoken, catalogo, contenttypes, sessions, users
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying authtoken.0001_initial... OK
+  Applying authtoken.0002_auto_20160226_1747... OK
+  Applying authtoken.0003_tokenproxy... OK
+  Applying catalogo.0001_initial... OK
+  Applying sessions.0001_initial... OK
+  Applying users.0001_initial... OK
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:28.708240+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python manage.py check
+System check identified no issues (0 silenced).
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:29.151628+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python -m pip check
+No broken requirements found.
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:29.480202+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python -m coverage --version
+Coverage.py, version 7.6.12 with C extension
+Full documentation is at https://coverage.readthedocs.io/en/7.6.12
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:29.607918+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python -m radon --version
+6.0.1
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:29.715364+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python -m pytest catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_serie_sem_informar_temporadas -v
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-8.1.1, pluggy-1.4.0 -- /workspace/scratch/catalogo-verificacao-limpa/venv/bin/python
+cachedir: .pytest_cache
+django: version: 4.2.3, settings: config.settings (from ini)
+rootdir: /workspace/scratch/catalogo-verificacao-limpa
+configfile: pytest.ini
+plugins: django-4.8.0
+collecting ... collected 1 item
+
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_serie_sem_informar_temporadas PASSED [100%]
+
+=============================== warnings summary ===============================
+venv/lib/python3.12/site-packages/pytz/tzinfo.py:27
+  /workspace/scratch/catalogo-verificacao-limpa/venv/lib/python3.12/site-packages/pytz/tzinfo.py:27: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+    _epoch = datetime.utcfromtimestamp(0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 1 passed, 1 warning in 0.36s =========================
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:30.712618+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python -m coverage erase
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:30.849261+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python -m coverage run -m pytest -v
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-8.1.1, pluggy-1.4.0 -- /workspace/scratch/catalogo-verificacao-limpa/venv/bin/python
+cachedir: .pytest_cache
+django: version: 4.2.3, settings: config.settings (from ini)
+rootdir: /workspace/scratch/catalogo-verificacao-limpa
+configfile: pytest.ini
+plugins: django-4.8.0
+collecting ... collected 16 items
+
+catalogo/teste.py::CatalogoAPITests::test_cadastra_filme_sem_temporadas PASSED [  6%]
+catalogo/teste.py::CatalogoAPITests::test_cadastra_genero PASSED         [ 12%]
+catalogo/teste.py::CatalogoAPITests::test_cadastra_serie_com_duas_temporadas PASSED [ 18%]
+catalogo/teste.py::CatalogoAPITests::test_consulta_genero PASSED         [ 25%]
+catalogo/teste.py::CatalogoAPITests::test_consulta_titulo PASSED         [ 31%]
+catalogo/teste.py::CatalogoAPITests::test_exclui_titulo PASSED           [ 37%]
+catalogo/teste.py::CatalogoAPITests::test_lista_titulos PASSED           [ 43%]
+catalogo/teste.py::CatalogoAPITests::test_patch_converte_serie_para_filme_com_temporadas_null PASSED [ 50%]
+catalogo/teste.py::CatalogoAPITests::test_patch_nome_preserva_temporadas_omitidas PASSED [ 56%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_filme_sem_limpar_temporadas PASSED [ 62%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_serie_sem_informar_temporadas PASSED [ 68%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_temporadas_null_mantendo_serie PASSED [ 75%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_filme_com_temporadas PASSED [ 81%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_serie_com_zero_temporadas PASSED [ 87%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_serie_sem_campo_temporadas PASSED [ 93%]
+users/tests.py::UserTestCase::test_user PASSED                           [100%]
+
+=============================== warnings summary ===============================
+venv/lib/python3.12/site-packages/pytz/tzinfo.py:27
+  /workspace/scratch/catalogo-verificacao-limpa/venv/lib/python3.12/site-packages/pytz/tzinfo.py:27: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+    _epoch = datetime.utcfromtimestamp(0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 16 passed, 1 warning in 0.58s =========================
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:32.458253+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python -m coverage report -m
+Name                          Stmts   Miss   Cover   Missing
+------------------------------------------------------------
+catalogo/__init__.py              0      0 100.00%
+catalogo/api/__init__.py          0      0 100.00%
+catalogo/api/serializers.py      20      0 100.00%
+catalogo/api/views.py            12      0 100.00%
+catalogo/apps.py                  4      0 100.00%
+catalogo/models.py               19      2  89.47%   11, 30
+------------------------------------------------------------
+TOTAL                            55      2  96.36%
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:32.608747+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python -m coverage json -o /workspace/catalogo-filmes-series-api/docs/cobertura-catalogo.json
+Wrote JSON report to /workspace/catalogo-filmes-series-api/docs/cobertura-catalogo.json
+
+exit_code=0
+
+UTC: 2026-11-09T16:28:32.744628+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python -m radon cc catalogo -s -j -e 'catalogo/test*.py,catalogo/*test*.py,catalogo/migrations/*'
+{"catalogo/models.py": [{"type": "class", "rank": "A", "lineno": 4, "name": "Genero", "col_offset": 0, "endline": 11, "complexity": 2, "methods": [{"type": "method", "rank": "A", "lineno": 10, "name": "__str__", "col_offset": 4, "endline": 11, "complexity": 1, "classname": "Genero", "closures": []}]}, {"type": "class", "rank": "A", "lineno": 14, "name": "Titulo", "col_offset": 0, "endline": 30, "complexity": 2, "methods": [{"type": "method", "rank": "A", "lineno": 29, "name": "__str__", "col_offset": 4, "endline": 30, "complexity": 1, "classname": "Titulo", "closures": []}]}, {"type": "method", "rank": "A", "lineno": 10, "name": "__str__", "col_offset": 4, "endline": 11, "complexity": 1, "classname": "Genero", "closures": []}, {"type": "method", "rank": "A", "lineno": 29, "name": "__str__", "col_offset": 4, "endline": 30, "complexity": 1, "classname": "Titulo", "closures": []}], "catalogo/apps.py": [{"type": "class", "rank": "A", "lineno": 4, "name": "CatalogoConfig", "col_offset": 0, "endline": 6, "complexity": 1, "methods": []}], "catalogo/api/views.py": [{"type": "class", "rank": "A", "lineno": 8, "name": "GeneroViewSet", "col_offset": 0, "endline": 16, "complexity": 1, "methods": []}, {"type": "class", "rank": "A", "lineno": 19, "name": "TituloViewSet", "col_offset": 0, "endline": 22, "complexity": 1, "methods": []}], "catalogo/api/serializers.py": [{"type": "class", "rank": "B", "lineno": 12, "name": "TituloSerializer", "col_offset": 0, "endline": 44, "complexity": 6, "methods": [{"type": "method", "rank": "A", "lineno": 30, "name": "validate", "col_offset": 4, "endline": 44, "complexity": 5, "classname": "TituloSerializer", "closures": []}]}, {"type": "method", "rank": "A", "lineno": 30, "name": "validate", "col_offset": 4, "endline": 44, "complexity": 5, "classname": "TituloSerializer", "closures": []}, {"type": "class", "rank": "A", "lineno": 6, "name": "GeneroSerializer", "col_offset": 0, "endline": 6, "complexity": 1, "methods": []}]}
+
+exit_code=0
+
+UTC: 2026-11-09T16:29:10.054396+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ bash /workspace/scratch/exemplos-readme.sh
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   130  100    81  100    49  13905   8412 --:--:-- --:--:-- --:--:-- 26000
+HTTP/1.1 201 Created
+Date: Mon, 09 Nov 2026 16:29:10 GMT
+Server: WSGIServer/0.2 CPython/3.12.14
+Content-Type: application/json
+Vary: Accept, Cookie
+Allow: GET, POST, HEAD, OPTIONS
+X-Frame-Options: DENY
+Content-Length: 81
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+{"id":1,"nome":"Interestelar","tipo":"filme","genero":1,"numero_temporadas":null}  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100   152  100    78  100    74  25064  23778 --:--:-- --:--:-- --:--:-- 50666
+HTTP/1.1 400 Bad Request
+Date: Mon, 09 Nov 2026 16:29:10 GMT
+Server: WSGIServer/0.2 CPython/3.12.14
+Content-Type: application/json
+Vary: Accept, Cookie
+Allow: GET, POST, HEAD, OPTIONS
+X-Frame-Options: DENY
+Content-Length: 78
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+Cross-Origin-Opener-Policy: same-origin
+
+{"numero_temporadas":["Filmes devem ficar sem número de temporadas (null)."]}
+exit_code=0
+
+UTC: 2026-11-09T16:29:10.157218+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ curl --silent --show-error --output /dev/null --write-out 'Swagger HTTP %{http_code}\n' http://127.0.0.1:8000/swagger/
+Swagger HTTP 200
+
+exit_code=0
+
+UTC: 2026-11-09T16:29:10.211573+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ curl --silent --show-error --output /dev/null --write-out 'Schema HTTP %{http_code}\n' http://127.0.0.1:8000/schema/
+Schema HTTP 200
+
+exit_code=0
+
+UTC: 2026-11-09T16:29:26.376674+00:00
+cwd: /workspace/scratch/catalogo-verificacao-limpa
+$ venv/bin/python /workspace/scratch/verificar_token_limpo.py
+POST /api/token-auth/: HTTP 200 (credenciais e token omitidos)
+GET /api/titulos/ com Token: HTTP 200 ; títulos: 1
+Usuário/token descartáveis removidos somente no clone limpo.
+
+exit_code=0
+
+UTC: 2026-11-09T16:29:27.003683+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ sha256sum db.sqlite3
+6e4b87abfa1f50121cd3a63866e8026e0ee5e4ee7600badc5c51a380bade7c10  db.sqlite3
+
+exit_code=0
+
+UTC: 2026-11-09T16:31:16.390577+00:00
+cwd: /workspace/catalogo-filmes-series-api
+$ venv/bin/python -m pytest -v
+============================= test session starts ==============================
+platform linux -- Python 3.12.14, pytest-8.1.1, pluggy-1.4.0 -- /workspace/catalogo-filmes-series-api/venv/bin/python
+cachedir: .pytest_cache
+django: version: 4.2.3, settings: config.settings (from ini)
+rootdir: /workspace/catalogo-filmes-series-api
+configfile: pytest.ini
+plugins: django-4.8.0
+collecting ... collected 16 items
+
+catalogo/teste.py::CatalogoAPITests::test_cadastra_filme_sem_temporadas PASSED [  6%]
+catalogo/teste.py::CatalogoAPITests::test_cadastra_genero PASSED         [ 12%]
+catalogo/teste.py::CatalogoAPITests::test_cadastra_serie_com_duas_temporadas PASSED [ 18%]
+catalogo/teste.py::CatalogoAPITests::test_consulta_genero PASSED         [ 25%]
+catalogo/teste.py::CatalogoAPITests::test_consulta_titulo PASSED         [ 31%]
+catalogo/teste.py::CatalogoAPITests::test_exclui_titulo PASSED           [ 37%]
+catalogo/teste.py::CatalogoAPITests::test_lista_titulos PASSED           [ 43%]
+catalogo/teste.py::CatalogoAPITests::test_patch_converte_serie_para_filme_com_temporadas_null PASSED [ 50%]
+catalogo/teste.py::CatalogoAPITests::test_patch_nome_preserva_temporadas_omitidas PASSED [ 56%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_filme_sem_limpar_temporadas PASSED [ 62%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_serie_sem_informar_temporadas PASSED [ 68%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_temporadas_null_mantendo_serie PASSED [ 75%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_filme_com_temporadas PASSED [ 81%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_serie_com_zero_temporadas PASSED [ 87%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_serie_sem_campo_temporadas PASSED [ 93%]
+users/tests.py::UserTestCase::test_user PASSED                           [100%]
+
+=============================== warnings summary ===============================
+venv/lib/python3.12/site-packages/pytz/tzinfo.py:27
+  /workspace/catalogo-filmes-series-api/venv/lib/python3.12/site-packages/pytz/tzinfo.py:27: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+    _epoch = datetime.utcfromtimestamp(0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 16 passed, 1 warning in 0.37s =========================
+
+exit_code=0

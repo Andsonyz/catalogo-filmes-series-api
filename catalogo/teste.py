@@ -218,7 +218,6 @@ class CatalogoAPITests(APITestCase):
         self.assertEqual(titulo.tipo, "serie")
         self.assertEqual(titulo.numero_temporadas, 2)
 
-
     def test_patch_rejeita_conversao_para_serie_sem_informar_temporadas(self):
         titulo = Titulo.objects.create(
             nome="Filme do teste", tipo="filme", genero=self.genero
