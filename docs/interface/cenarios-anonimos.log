@@ -1,0 +1,13 @@
+{"cenario": "Página e catálogo vazio", "http": 200, "total": 0, "csrf_cookie": true}
+{"cenario": "Cadastro de gênero pela tela", "http": 201, "id": 2}
+{"cenario": "Cadastro de filme", "http": 201, "numero_temporadas": null}
+{"cenario": "Validação nativa de temporadas", "zero_invalido": true, "min": 1, "step": 1}
+{"cenario": "Erro real da API junto ao campo, sem perder preenchimento", "http": 400, "total": 1}
+{"cenario": "Cadastro de série", "http": 201, "numero_temporadas": 2}
+{"cenario": "Edição somente do nome", "http": 200, "payload": {"nome": "Dark: entre tempos"}, "temporadas_persistidas": 2}
+{"cenario": "Desktop e celular", "desktop": "1440x1060", "celular": "390x844", "overflow_horizontal": false, "erros_js": []}
+{"cenario": "Conversão série → filme e recarga", "http": 200, "payload": {"tipo": "filme", "numero_temporadas": null}, "tipo_persistido": "filme", "temporadas_persistidas": null}
+{"cenario": "Cancelamento da exclusão", "registro_preservado": true}
+{"cenario": "Confirmação da exclusão", "http": 204, "consulta_posterior": 404}
+{"cenario": "Falha de conexão no envio", "preenchimento_preservado": true, "falso_sucesso": false}
+{"cenario": "Falha de carregamento e tentar novamente", "recuperacao": true}
