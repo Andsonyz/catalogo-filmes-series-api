@@ -1,0 +1,93 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catálogo — Filmes e séries</title>
+  <link rel="stylesheet" href="{% static 'catalogo/catalogo.css' %}">
+  <script src="{% static 'catalogo/catalogo.js' %}" defer></script>
+</head>
+<body data-titulos-url="{% url 'titulos-list' %}" data-generos-url="{% url 'generos-list' %}">
+  <a class="skip-link" href="#colecao">Ir para o catálogo</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="{% url 'catalogo' %}" aria-label="Catálogo, início">
+        <span class="brand-mark" aria-hidden="true">C<span>•</span></span>
+        <span>CATÁLOGO<small>FILMES & SÉRIES</small></span>
+      </a>
+      <span class="header-note">Histórias que ficam.</span>
+      <a class="header-link" href="{% url 'swagger-ui' %}">Explorar API <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow"><span aria-hidden="true">●</span> SUA COLEÇÃO, EM CENA</p>
+        <h1 id="page-title">Boas histórias.<br><em>Um só lugar.</em></h1>
+        <p class="intro-description">Organize seus filmes e séries. Cada título tem seu lugar,<br class="desktop-break"> cada gênero abre um novo universo.</p>
+      </div>
+      <div class="intro-action">
+        <span class="reel" aria-hidden="true">▤</span>
+        <button class="button primary" id="adicionar-titulo" type="button"><span aria-hidden="true">＋</span> Adicionar título</button>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Resumo do catálogo">
+      <div><span id="total-titulos">—</span><p>Títulos no catálogo</p></div>
+      <div><span id="total-filmes">—</span><p>Filmes</p></div>
+      <div><span id="total-series">—</span><p>Séries</p></div>
+    </section>
+
+    <div id="mensagem" class="notice" role="status" aria-live="polite" hidden></div>
+
+    <div class="workspace">
+      <section id="colecao" class="collection" aria-labelledby="collection-title" aria-busy="true" tabindex="-1">
+        <div class="section-heading"><h2 id="collection-title">Seu catálogo</h2><span class="section-caption">FEITO DE HISTÓRIAS</span></div>
+        <div id="carregando" class="empty-state" role="status"><span class="spinner" aria-hidden="true"></span><h3>Preparando a próxima cena…</h3><p>Carregando títulos e gêneros.</p></div>
+        <div id="falha-carregamento" class="empty-state" role="alert" hidden><span class="empty-icon" aria-hidden="true">↻</span><h3>Não conseguimos carregar o catálogo</h3><p id="erro-carregamento"></p><button class="button secondary" id="tentar-novamente" type="button">Tentar novamente</button></div>
+        <div id="catalogo-vazio" class="empty-state" hidden><span class="empty-icon" aria-hidden="true">＋</span><p class="eyebrow">TODA COLEÇÃO TEM UM COMEÇO</p><h3>Qual é a sua primeira história?</h3><p>Cadastre um gênero e adicione um filme ou uma série para começar.</p><button class="button secondary" id="primeiro-titulo" type="button">Adicionar primeiro título</button></div>
+        <ul id="lista-titulos" class="title-list" aria-label="Títulos cadastrados"></ul>
+      </section>
+
+      <aside class="editor" aria-labelledby="form-title">
+        <div class="editor-heading"><span class="eyebrow" id="form-modo">NOVA HISTÓRIA</span><span class="editor-dot" aria-hidden="true"></span></div>
+        <h2 id="form-title">Adicionar título</h2>
+        <p id="form-description">Mais uma história para a sua coleção.</p>
+        <form id="titulo-form">
+          {% csrf_token %}
+          <p id="erro-formulario" class="form-error" role="alert" hidden></p>
+          <fieldset id="titulo-campos" disabled>
+            <legend class="visually-hidden">Dados do título</legend>
+            <div class="field"><label for="nome">Nome da obra <span aria-hidden="true">*</span></label><input id="nome" name="nome" maxlength="200" required placeholder="Como essa história se chama?" aria-describedby="erro-nome"><p id="erro-nome" class="field-error" hidden></p></div>
+            <div class="field"><label for="tipo">Tipo <span aria-hidden="true">*</span></label><select id="tipo" name="tipo" required aria-describedby="erro-tipo"><option value="filme">Filme</option><option value="serie">Série</option></select><p id="erro-tipo" class="field-error" hidden></p></div>
+            <div class="field" id="campo-temporadas" hidden><label for="numero_temporadas">Número de temporadas <span aria-hidden="true">*</span></label><input type="number" id="numero_temporadas" name="numero_temporadas" min="1" step="1" inputmode="numeric" aria-describedby="dica-temporadas erro-numero_temporadas"><small id="dica-temporadas">Séries precisam de pelo menos uma temporada.</small><p id="erro-numero_temporadas" class="field-error" hidden></p></div>
+            <div class="field"><div class="label-row"><label for="genero">Gênero <span aria-hidden="true">*</span></label><button id="abrir-genero" class="text-button" type="button">＋ Novo gênero</button></div><select id="genero" name="genero" required aria-describedby="erro-genero"><option value="">Selecione um gênero</option></select><p id="erro-genero" class="field-error" hidden></p></div>
+            <div class="form-actions"><button id="salvar-titulo" class="button primary" type="submit">Adicionar ao catálogo</button><button id="cancelar-edicao" class="button quiet" type="button" hidden>Cancelar edição</button></div>
+          </fieldset>
+          <p class="form-footnote">Os campos com * são obrigatórios.</p>
+        </form>
+      </aside>
+    </div>
+    <footer class="site-footer"><span>CATÁLOGO <span aria-hidden="true">/</span> Filmes & séries</span><span>Uma coleção de boas histórias.</span></footer>
+  </main>
+
+  <dialog id="genero-dialog" aria-labelledby="genero-dialog-title" aria-describedby="genero-dialog-description">
+    <form id="genero-form">
+      <div class="dialog-header"><p class="eyebrow">ORGANIZE SUA COLEÇÃO</p><button class="icon-button" id="fechar-genero" type="button" aria-label="Fechar cadastro de gênero">×</button></div>
+      <h2 id="genero-dialog-title">Novo gênero</h2><p id="genero-dialog-description">Crie um gênero para classificar suas histórias.</p>
+      <p id="erro-genero-formulario" class="form-error" role="alert" hidden></p>
+      <div class="field"><label for="genero-nome">Nome do gênero</label><input id="genero-nome" name="nome" maxlength="100" required placeholder="Ex.: Ficção científica" aria-describedby="erro-genero-nome"><p id="erro-genero-nome" class="field-error" hidden></p></div>
+      <div class="dialog-actions"><button class="button secondary" id="cancelar-genero" type="button">Cancelar</button><button class="button primary" id="salvar-genero" type="submit">Criar gênero</button></div>
+    </form>
+  </dialog>
+  <template id="titulo-template">
+    <li class="title-card">
+      <div class="title-art" aria-hidden="true"><span class="art-label"></span><span class="art-symbol"></span><span class="art-id"></span></div>
+      <div class="title-content"><div class="title-meta"><span class="type-badge"></span><span class="title-seasons"></span></div><h3></h3><p class="title-genre"></p><div class="title-actions"><button class="edit-title" type="button">Editar <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></button><button class="delete-title" type="button">Excluir</button></div></div>
+    </li>
+  </template>
+  <noscript><p class="notice">Ative o JavaScript para usar o catálogo. A documentação da API está disponível em <a href="{% url 'swagger-ui' %}">Swagger</a>.</p></noscript>
+</body>
+</html>
