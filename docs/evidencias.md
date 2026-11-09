@@ -141,7 +141,7 @@ Exemplo de atualização: em uma série com três temporadas, `PATCH /api/titulo
 - A revisão documental desta correção e as verificações do estado Git estão em [registro-correcao-tema.log](registro-correcao-tema.log). As verificações de execução da base acima pertencem à primeira execução; não foram apresentadas como novas execuções nesta correção documental.
 - A correção será registrada em novo commit descritivo, sem reescrever commits nem realizar merge da nova branch. O hash final e a publicação são informados no fechamento da conversa.
 
-## Implementação da API — etapa atual
+## Implementação da API — etapa anterior
 
 Branch `feat/catalogo-audiovisual`, iniciada nesta etapa em `983f5e9`, com checkout limpo. Reutilizado o remoto `origin` da equipe. Implementados o app `catalogo`, models `Genero` e `Titulo`, FK com `PROTECT`, migration `0001_initial`, serializers e viewsets registrados no `SimpleRouter` da base. Nenhuma interface adicional foi criada.
 
@@ -204,3 +204,58 @@ Os títulos foram excluídos pela API. O gênero e o usuário/token temporários
 - `a6693cd` — `feat: expõe catálogo REST com validação de temporadas em criação e atualização`.
 - Evidências e instruções de reprodução recebem commit documental separado.
 - Parar antes da etapa de testes automatizados. Continuam pendentes testes, métricas, análise acadêmica de uso de IA, merge e relatório final. O teste demonstrativo herdado continua no projeto; seu resultado antigo não representa validação automatizada da nova API.
+
+## Testes automatizados — etapa atual
+
+Implementados **14 testes da equipe** em [catalogo/tests.py](../catalogo/tests.py), usando `rest_framework.test.APITestCase`, integrados ao `pytest` e ao `pytest-django` já configurados em `pytest.ini`. Não foi necessária alteração no código da API, nas dependências nem no executor. Branch mantida: `feat/catalogo-audiovisual`.
+
+Cada teste recebe gênero, usuário e token próprios em `setUp`, e cria os títulos de que precisa. O cliente envia autenticação Token real do DRF, sem `force_authenticate`. `APITestCase` isola e reverte os dados entre testes em banco SQLite de testes, separado do banco local. Não há dependência de IDs fixos, registros da equipe, ordem de execução ou servidor HTTP externo.
+
+### Cobertura de comportamento
+
+| Cenário | Verificação |
+| --- | --- |
+| Cadastro de gênero | HTTP 201 e nome persistido |
+| Consulta de gênero | HTTP 200, ID e nome |
+| Cadastro válido de filme sem temporadas | HTTP 201, FK correta e temporadas nulas no banco e na resposta |
+| Cadastro válido de série | HTTP 201, tipo, FK e duas temporadas persistidas |
+| Listagem de títulos | HTTP 200 e IDs dos dois títulos criados no teste |
+| Consulta de título | HTTP 200 e conteúdo completo esperado |
+| PATCH somente do nome | HTTP 200; `refresh_from_db()` confirma nome novo e preservação de tipo, gênero e temporadas |
+| Exclusão | HTTP 204; ausência no banco, consulta posterior 404 e outro título preservado |
+| Filme com temporadas | HTTP 400, mensagem explicativa e nenhuma gravação |
+| Série com zero temporadas | HTTP 400, mensagem sobre mínimo de 1 e nenhuma gravação |
+| Série sem o campo de temporadas | HTTP 400, mensagem sobre temporadas obrigatórias e nenhuma gravação |
+| PATCH de série para filme sem limpar temporadas | HTTP 400; `refresh_from_db()` confirma tipo série, temporadas 2 e nome original, inclusive quando o payload tenta mudar também o nome |
+| PATCH de série para filme com temporadas null | HTTP 200; banco e resposta confirmam tipo filme e temporadas nulas |
+| PATCH de temporadas null mantendo tipo série | HTTP 400; estado anterior preservado após recarregar |
+
+Os três testes de cadastro inválido conferem o campo de erro e o conteúdo da mensagem, a contagem inalterada, a ausência do título rejeitado e a preservação de um título preexistente dentro do próprio teste. O caso adicional de null mantendo série diferencia explicitamente limpar temporadas de omitir o campo.
+
+### Execução real e reprodução
+
+Na raiz do repositório, com o ambiente preparado conforme o README:
+
+```bash
+# Somente os testes novos da equipe:
+venv/bin/python -m pytest catalogo/tests.py -v
+
+# Suíte completa, incluindo o teste herdado:
+venv/bin/python -m pytest -v
+```
+
+| Comando | Resultado real | Código de saída |
+| --- | --- | --- |
+| `venv/bin/python -m pytest catalogo/tests.py -v` | **14 passed, 1 warning in 0.43s** | 0 |
+| `venv/bin/python -m pytest -v` | **15 passed, 1 warning in 0.85s** | 0 |
+| `git diff --check` | Sem problemas de espaços/formatação do diff | 0 |
+
+Execuções em 08/11/2026 às 21h32 (America/Fortaleza); horários UTC completos, versões, nomes de todos os testes e saídas reais em [registro-testes.log](registro-testes.log).
+
+**Contagem final:** 14 testes da equipe + 1 teste herdado = **15 testes** na suíte. O herdado é `users/tests.py::UserTestCase::test_user`, que apenas compara `1 == 1`; não é contabilizado como teste da API desenvolvido pela equipe.
+
+Não houve teste falhando nem erro de configuração/ambiente. Foi emitido um `DeprecationWarning` em `pytz/tzinfo.py:27`: a dependência herdada usa `datetime.datetime.utcfromtimestamp()`, depreciado no Python 3.12. O aviso não impediu a execução nem indica falha da API; não foi ocultado e não motivou mudança de dependências nesta etapa. Como ambas as execuções passaram sem mudanças subsequentes nos testes ou na API, não houve necessidade de rodada de correção.
+
+O arquivo `db.sqlite3` já estava modificado desde as migrações da etapa anterior. Seu SHA-256 antes e depois destas execuções foi o mesmo: `6e4b87abfa1f50121cd3a63866e8026e0ee5e4ee7600badc5c51a380bade7c10`. Essa alteração local preexistente foi preservada e não integra o commit de testes.
+
+Esta etapa encerra com testes, log e evidências em novo commit descritivo. Não foram iniciadas métricas, análise acadêmica de IA ou relatório final, nem realizado merge.
