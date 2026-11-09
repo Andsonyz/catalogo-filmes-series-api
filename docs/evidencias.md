@@ -358,3 +358,5 @@ Os comandos Windows/PowerShell foram documentados com `py -3.12`, o executável 
 ### Regras e preparação da integração
 
 Destino confirmado no GitHub: `Andsonyz/catalogo-filmes-series-api`, público, branch padrão `main`. Em 09/11/2026, `gh api repos/Andsonyz/catalogo-filmes-series-api/branches/main` informou `protected: false`, e a consulta a `/rulesets` retornou lista vazia. O repositório permite merge commits. Será utilizado PR de `feat/catalogo-audiovisual` para `main`, com merge commit para preservar os commits individuais, sem reescrever histórico. A confirmação do merge e os testes na revisão integrada serão registrados após sua execução. Não foi redigido relatório.
+
+Durante a preparação do PR #3, a equipe publicou `33dc79b` na `main`, acrescentando o mesmo teste de conversão inversa e sua evidência. A atualização foi incorporada à branch antes do merge final. Os conflitos eram sobreposição do mesmo teste/log e espaços/fim de linha; foi preservado um único teste com todas as asserções e a evidência histórica mais completa. Nenhuma regra de produção mudou. Ambos os commits de origem permanecem no histórico.
