@@ -15,11 +15,12 @@ O catálogo possui `Genero` e `Titulo`, relacionados por chave estrangeira. Ofer
 Reproduzido com Python 3.12.14 no Linux:
 
 ```bash
-py -3.11 -m venv venv
-.\venv\Scripts\python.exe -m pip install -r requirements.txt
-.\venv\Scripts\python.exe manage.py migrate
-.\venv\Scripts\python.exe manage.py check
-.\venv\Scripts\python.exe manage.py runserver
+python3 -m venv venv
+venv/bin/python -m pip install -r requirements.txt
+venv/bin/python manage.py migrate --noinput
+venv/bin/python manage.py check
+venv/bin/python -m pytest -v
+venv/bin/python manage.py runserver
 ```
 
 Rotas existentes: Swagger em `/swagger/`, OpenAPI em `/schema/`, exemplo em `/users/` e autenticação em `/api/token-auth/`. As dependências da base foram mantidas. O app `catalogo` acrescenta `/api/generos/` e `/api/titulos/`. A API segue `AllowAny` da base e aceita também Basic, Session e Token. O tutorial original permanece abaixo; a documentação atual do catálogo está em `docs/api.md`.

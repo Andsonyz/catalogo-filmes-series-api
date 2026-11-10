@@ -16,13 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.views.generic import TemplateView
 from rest_framework.routers import SimpleRouter
 from rest_framework.authtoken import views
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from users.api.views import UserProfileExampleViewSet
 from catalogo.api.views import GeneroViewSet, TituloViewSet
-from catalogo.views import pagina_catalogo
 
 router = SimpleRouter()
 
@@ -31,8 +29,6 @@ router.register("api/generos", GeneroViewSet, basename="generos")
 router.register("api/titulos", TituloViewSet, basename="titulos")
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="catalogo/home.html"), name="home"),
-    path("catalogo/", pagina_catalogo, name="catalogo"),
     path("admin/", admin.site.urls),
     path("api/token-auth/", views.obtain_auth_token),
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
