@@ -1,0 +1,115 @@
+Registro da medicao local do catalogo
+Horario UTC: 2026-11-10T04:02:25.476967+00:00
+HEAD: 055936104d4207036792b557d70db8e81a41ce6c
+Escopo: arquivos Python de producao em catalogo, excluidos testes e migrations.
+A arvore de trabalho contem mudancas nao commitadas; consulte manifesto-codigo-medido.json.
+Python: Python 3.11.9
+
+$ .\venv\Scripts\python.exe -m coverage --version
+Coverage.py, version 7.6.12 with C extension
+Full documentation is at https://coverage.readthedocs.io/en/7.6.12
+
+
+Codigo de saida: 0
+
+$ .\venv\Scripts\python.exe -m radon --version
+6.0.1
+
+
+Codigo de saida: 0
+
+$ .\venv\Scripts\python.exe -m coverage run -m pytest -v
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.1.1, pluggy-1.4.0 -- C:\Users\anton\catalogo-filmes-series-api\venv\Scripts\python.exe
+cachedir: .pytest_cache
+django: version: 4.2.3, settings: config.settings (from ini)
+rootdir: C:\Users\anton\catalogo-filmes-series-api
+configfile: pytest.ini
+plugins: django-4.8.0
+collecting ... collected 33 items
+
+catalogo/test_assistir.py::AreaClienteTests::test_busca_e_escapada_e_preservada PASSED [  3%]
+catalogo/test_assistir.py::AreaClienteTests::test_busca_ignora_maiusculas_tambem_em_letras_acentuadas PASSED [  6%]
+catalogo/test_assistir.py::AreaClienteTests::test_caracteres_especiais_sao_pesquisados_como_texto_literal PASSED [  9%]
+catalogo/test_assistir.py::AreaClienteTests::test_catalogo_vazio_tem_orientacao_propria PASSED [ 12%]
+catalogo/test_assistir.py::AreaClienteTests::test_cliente_anonima_consulta_catalogo_sem_controles_de_edicao PASSED [ 15%]
+catalogo/test_assistir.py::AreaClienteTests::test_combina_nome_genero_e_tipo PASSED [ 18%]
+catalogo/test_assistir.py::AreaClienteTests::test_consulta_rejeita_escrita PASSED [ 21%]
+catalogo/test_assistir.py::AreaClienteTests::test_filtro_de_genero_e_tipo_funcionam_sozinhos PASSED [ 24%]
+catalogo/test_assistir.py::AreaClienteTests::test_filtros_invalidos_nao_retornam_todos_os_titulos PASSED [ 27%]
+catalogo/test_assistir.py::AreaClienteTests::test_mostra_quando_filme_nao_esta_no_genero_escolhido PASSED [ 30%]
+catalogo/test_assistir.py::AreaClienteTests::test_nome_filtra_sem_depender_dos_outros_campos PASSED [ 33%]
+catalogo/test_assistir.py::AreaClienteTests::test_paginacao_preserva_filtros_e_nao_repete_resultados PASSED [ 36%]
+catalogo/test_interface.py::PaginaCatalogoTests::test_acervo_e_generos_oferecem_volta_no_html_sem_mudar_json PASSED [ 39%]
+catalogo/test_interface.py::PaginaCatalogoTests::test_gestao_e_dialogo_de_genero_oferecem_volta_ao_inicio PASSED [ 42%]
+catalogo/test_interface.py::PaginaCatalogoTests::test_pagina_renderiza_e_prepara_csrf_para_o_javascript PASSED [ 45%]
+catalogo/test_interface.py::PaginaCatalogoTests::test_sessao_autenticada_requer_csrf_e_aceita_o_token_da_pagina PASSED [ 48%]
+catalogo/teste.py::CatalogoAPITests::test_cadastra_filme_sem_temporadas PASSED [ 51%]
+catalogo/teste.py::CatalogoAPITests::test_cadastra_genero PASSED         [ 54%]
+catalogo/teste.py::CatalogoAPITests::test_cadastra_serie_com_duas_temporadas PASSED [ 57%]
+catalogo/teste.py::CatalogoAPITests::test_consulta_genero PASSED         [ 60%]
+catalogo/teste.py::CatalogoAPITests::test_consulta_titulo PASSED         [ 63%]
+catalogo/teste.py::CatalogoAPITests::test_exclui_titulo PASSED           [ 66%]
+catalogo/teste.py::CatalogoAPITests::test_lista_titulos PASSED           [ 69%]
+catalogo/teste.py::CatalogoAPITests::test_patch_converte_serie_para_filme_com_temporadas_null PASSED [ 72%]
+catalogo/teste.py::CatalogoAPITests::test_patch_nome_preserva_temporadas_omitidas PASSED [ 75%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_filme_sem_limpar_temporadas PASSED [ 78%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_serie_sem_informar_temporadas PASSED [ 81%]
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_temporadas_null_mantendo_serie PASSED [ 84%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_filme_com_temporadas PASSED [ 87%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_serie_com_zero_temporadas PASSED [ 90%]
+catalogo/teste.py::CatalogoAPITests::test_rejeita_cadastro_serie_sem_campo_temporadas PASSED [ 93%]
+users/tests.py::UserTestCase::test_user PASSED                           [ 96%]
+catalogo/test_home.py::HomePageTests::test_home_page_links_to_catalog_and_documentation PASSED [100%]
+
+============================= 33 passed in 0.98s ==============================
+
+
+Codigo de saida: 0
+
+$ .\venv\Scripts\python.exe -m coverage report -m
+Name                          Stmts   Miss   Cover   Missing
+------------------------------------------------------------
+catalogo\__init__.py              0      0 100.00%
+catalogo\api\__init__.py          0      0 100.00%
+catalogo\api\renderers.py         3      0 100.00%
+catalogo\api\serializers.py      20      0 100.00%
+catalogo\api\views.py            16      0 100.00%
+catalogo\apps.py                  4      0 100.00%
+catalogo\forms.py                 6      0 100.00%
+catalogo\models.py               19      1  94.74%   30
+catalogo\views.py                33      0 100.00%
+------------------------------------------------------------
+TOTAL                           101      1  99.01%
+
+
+Codigo de saida: 0
+
+$ .\venv\Scripts\python.exe -m coverage json -o docs/cobertura-catalogo.json
+Wrote JSON report to docs/cobertura-catalogo.json
+
+
+Codigo de saida: 0
+
+$ .\venv\Scripts\python.exe -m radon cc catalogo -s -j -e catalogo/test*.py,catalogo/*test*.py,catalogo/migrations/*
+{"catalogo\\apps.py": [{"type": "class", "rank": "A", "name": "CatalogoConfig", "complexity": 1, "endline": 6, "lineno": 4, "col_offset": 0, "methods": []}], "catalogo\\forms.py": [{"type": "class", "rank": "A", "name": "BuscaCatalogoForm", "complexity": 1, "endline": 19, "lineno": 6, "col_offset": 0, "methods": []}], "catalogo\\models.py": [{"type": "class", "rank": "A", "name": "Genero", "complexity": 2, "endline": 11, "lineno": 4, "col_offset": 0, "methods": [{"type": "method", "rank": "A", "name": "__str__", "complexity": 1, "classname": "Genero", "endline": 11, "lineno": 10, "col_offset": 4, "closures": []}]}, {"type": "class", "rank": "A", "name": "Titulo", "complexity": 2, "endline": 30, "lineno": 14, "col_offset": 0, "methods": [{"type": "method", "rank": "A", "name": "__str__", "complexity": 1, "classname": "Titulo", "endline": 30, "lineno": 29, "col_offset": 4, "closures": []}]}, {"type": "method", "rank": "A", "name": "__str__", "complexity": 1, "classname": "Genero", "endline": 11, "lineno": 10, "col_offset": 4, "closures": []}, {"type": "method", "rank": "A", "name": "__str__", "complexity": 1, "classname": "Titulo", "endline": 30, "lineno": 29, "col_offset": 4, "closures": []}], "catalogo\\views.py": [{"type": "function", "rank": "B", "name": "pagina_assistir", "complexity": 6, "endline": 49, "lineno": 20, "col_offset": 0, "closures": []}, {"type": "function", "rank": "A", "name": "pagina_catalogo", "complexity": 1, "endline": 16, "lineno": 15, "col_offset": 0, "closures": []}], "catalogo\\api\\renderers.py": [{"type": "class", "rank": "A", "name": "CatalogoBrowsableAPIRenderer", "complexity": 1, "endline": 5, "lineno": 4, "col_offset": 0, "methods": []}], "catalogo\\api\\serializers.py": [{"type": "class", "rank": "B", "name": "TituloSerializer", "complexity": 6, "endline": 44, "lineno": 12, "col_offset": 0, "methods": [{"type": "method", "rank": "A", "name": "validate", "complexity": 5, "classname": "TituloSerializer", "endline": 44, "lineno": 30, "col_offset": 4, "closures": []}]}, {"type": "method", "rank": "A", "name": "validate", "complexity": 5, "classname": "TituloSerializer", "endline": 44, "lineno": 30, "col_offset": 4, "closures": []}, {"type": "class", "rank": "A", "name": "GeneroSerializer", "complexity": 1, "endline": 6, "lineno": 6, "col_offset": 0, "methods": []}], "catalogo\\api\\views.py": [{"type": "class", "rank": "A", "name": "GeneroViewSet", "complexity": 1, "endline": 19, "lineno": 10, "col_offset": 0, "methods": []}, {"type": "class", "rank": "A", "name": "TituloViewSet", "complexity": 1, "endline": 26, "lineno": 22, "col_offset": 0, "methods": []}]}
+
+
+Codigo de saida: 0
+
+$ .\venv\Scripts\python.exe -m pytest catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_serie_sem_informar_temporadas -v
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.1.1, pluggy-1.4.0 -- C:\Users\anton\catalogo-filmes-series-api\venv\Scripts\python.exe
+cachedir: .pytest_cache
+django: version: 4.2.3, settings: config.settings (from ini)
+rootdir: C:\Users\anton\catalogo-filmes-series-api
+configfile: pytest.ini
+plugins: django-4.8.0
+collecting ... collected 1 item
+
+catalogo/teste.py::CatalogoAPITests::test_patch_rejeita_conversao_para_serie_sem_informar_temporadas PASSED [100%]
+
+============================== 1 passed in 0.53s ==============================
+
+
+Codigo de saida: 0

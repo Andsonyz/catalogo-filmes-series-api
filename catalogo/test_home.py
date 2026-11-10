@@ -10,4 +10,5 @@ class HomePageTests(SimpleTestCase):
         self.assertContains(response, 'href="/api/generos/"')
         self.assertContains(response, 'href="/api/titulos/"')
         self.assertContains(response, 'href="/swagger/"')
-        
+        self.assertContains(response, 'href="/catalogo/"')
+        self.assertContains(response, 'href="/assistir/"')

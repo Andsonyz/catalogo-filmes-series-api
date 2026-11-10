@@ -12,12 +12,16 @@
   <a class="skip-link" href="#colecao">Ir para o catálogo</a>
   <header class="site-header">
     <div class="shell header-inner">
-      <a class="brand" href="{% url 'catalogo' %}" aria-label="Catálogo, início">
+      <a class="brand" href="{% url 'home' %}" aria-label="Catálogo, início">
         <span class="brand-mark" aria-hidden="true">C<span>•</span></span>
         <span>CATÁLOGO<small>FILMES & SÉRIES</small></span>
       </a>
       <span class="header-note">Histórias que ficam.</span>
-      <a class="header-link" href="{% url 'swagger-ui' %}">Explorar API <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+      <nav class="header-nav" aria-label="Navegação principal">
+        <a class="header-link" href="{% url 'home' %}">Voltar à página inicial</a>
+        <a class="header-link" href="{% url 'assistir' %}">O que assistir</a>
+        <a class="header-link" href="{% url 'swagger-ui' %}">Explorar API ↗</a>
+      </nav>
     </div>
   </header>
 
@@ -80,6 +84,7 @@
       <p id="erro-genero-formulario" class="form-error" role="alert" hidden></p>
       <div class="field"><label for="genero-nome">Nome do gênero</label><input id="genero-nome" name="nome" maxlength="100" required placeholder="Ex.: Ficção científica" aria-describedby="erro-genero-nome"><p id="erro-genero-nome" class="field-error" hidden></p></div>
       <div class="dialog-actions"><button class="button secondary" id="cancelar-genero" type="button">Cancelar</button><button class="button primary" id="salvar-genero" type="submit">Criar gênero</button></div>
+      <p class="dialog-return"><a href="{% url 'home' %}">Voltar à página inicial</a></p>
     </form>
   </dialog>
   <template id="titulo-template">

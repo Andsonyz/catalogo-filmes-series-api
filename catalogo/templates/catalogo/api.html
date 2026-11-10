@@ -1,0 +1,12 @@
+{% extends "rest_framework/base.html" %}
+
+{% block branding %}
+  <a class="navbar-brand" href="{% url 'home' %}">Catálogo de filmes e séries</a>
+{% endblock %}
+
+{% block userlinks %}
+  <li><a href="{% url 'home' %}">Voltar à página inicial</a></li>
+  <li><a href="{% url 'assistir' %}">O que assistir</a></li>
+  <li><a href="{% url 'catalogo' %}">Gerenciar catálogo</a></li>
+  {{ block.super }}
+{% endblock %}

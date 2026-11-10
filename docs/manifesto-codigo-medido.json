@@ -1,0 +1,15 @@
+{
+  "head": "055936104d4207036792b557d70db8e81a41ce6c",
+  "situacao": "HEAD mais alteracoes locais nao commitadas",
+  "sha256": {
+    "catalogo/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "catalogo/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "catalogo/api/renderers.py": "53ff58e5d436f3b08c1fc92226f222c2251ff1e6254e14c1e759e7e086ccd791",
+    "catalogo/api/serializers.py": "5b859a4008f9cdcd469ab5b61501fb22d557d729bdacaa28d94be09c3b6b62fa",
+    "catalogo/api/views.py": "7bcb190fb080520120aeb45400aefd59ee6e022d1c5543254e07938994ee7059",
+    "catalogo/apps.py": "17136cc1292d106ee1c9a0ceff4f133f4dcacce0c1f989f5bbd9c1f078a9b76b",
+    "catalogo/forms.py": "734ee06b9aeb139c6eecb66954d20c719aee1d21976612b213f40d1ec777d1f7",
+    "catalogo/models.py": "1e47e0573990df52973df606eb11709004c2f3f45de5eb37aa6c2e10873f6d8f",
+    "catalogo/views.py": "f218330d9e977155f5bcaf2256ce199cd8e435fe23664b216b164a9abe97b21b"
+  }
+}

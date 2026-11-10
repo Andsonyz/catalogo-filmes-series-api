@@ -19,6 +19,9 @@ input:focus-visible,select:focus-visible { outline-offset:2px; }
 .brand-mark span { color:#f3a278; font:25px Georgia,serif; margin-left:3px; }
 .header-note { font:italic 16px Georgia,serif; color:#d5d9c9; }
 .header-link { text-decoration:none; font-size:12px; border-bottom:1px solid #718379; padding:7px 0; }
+.header-nav { display:flex; flex-wrap:wrap; align-items:center; gap:8px 22px; }
+.header-nav .header-link { min-height:44px; display:inline-flex; align-items:center; }
+.dialog-return { margin:22px 0 0; font-size:12px; text-align:center; }
 .header-link span { margin-left:16px; }
 .arrow-icon { width:12px; height:12px; vertical-align:middle; margin-left:6px; fill:none; stroke:currentColor; stroke-width:1.6; }
 .intro { padding:58px 0 40px; display:flex; align-items:flex-end; justify-content:space-between; gap:20px; }
@@ -111,3 +114,4 @@ dialog h2+p { color:var(--muted); font-size:13px; margin-bottom:25px; }
 @media (max-width:700px) { .shell { width:calc(100% - 36px); } .header-inner { height:80px; } .header-link { font-size:10px; } .header-link span { margin-left:4px; } .brand { font-size:13px; } .brand-mark { font-size:32px; } .brand small { font-size:8px; letter-spacing:1.8px; } .intro { padding:35px 0 30px; display:block; } h1 { font-size:46px; } .intro-description { font-size:13px; } .desktop-break,.reel { display:none; } .intro-action { margin-top:25px; align-items:flex-start; } .stats { margin-bottom:30px; padding:18px 0; } .stats>div { padding:0 12px; display:block; } .stats span { font-size:30px; } .stats p { font-size:10px; margin-top:6px; } .workspace { display:flex; flex-direction:column; gap:30px; } .collection,.editor { width:100%; } .editor { position:static; } .title-list { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } .title-art { height:105px; padding:12px; } .art-symbol { font-size:170px; top:-45px; } .title-content { padding:14px 12px 0; } .title-content h3 { font-size:22px; } .title-meta { gap:5px; } .title-seasons { font-size:9px; } .title-genre { font-size:11px; } .section-caption { font-size:7px; } .site-footer { flex-direction:column; gap:5px; } .empty-state { padding:35px 20px; } }
 @media (max-width:360px) { .title-list { grid-template-columns:1fr; } h1 { font-size:40px; } }
 @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .spinner { animation:none; } }
+@media (max-width:700px) { .header-inner { height:auto; min-height:80px; padding-top:18px; padding-bottom:18px; flex-wrap:wrap; } .header-nav { width:100%; gap:4px 18px; } .header-nav .header-link { font-size:12px; } }

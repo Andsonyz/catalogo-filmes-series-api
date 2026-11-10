@@ -1,0 +1,17 @@
+PDF: output/pdf/Cadastro_filmes_series_Unidade02.pdf
+Data local: 10/11/2026
+Paginas: 3 (limite: 3)
+Formato: A4
+Fonte em todos os caracteres: Times New Roman, normal/negrito, incorporada
+Tamanho em todos os caracteres: 12 pt
+Cor em todos os caracteres: preto
+Paragrafos: justificados por configuracao do gerador ReportLab (TA_JUSTIFY)
+Margens: 22 mm laterais; 18 mm superior; 21 mm inferior
+Todos os caracteres dentro das margens verificadas
+Conteudo obrigatorio: integrantes, contexto, entidades/endpoints, testes, metricas, prompt/resposta/analise de IA e dificuldades
+Fontes e resultados: evidencias e JSON do repositorio; hashes do codigo conferidos antes da geracao
+Renderizacao: pypdfium2, escala 1.6, tres PNGs inspecionados visualmente
+Resultado visual: sem cortes, sobreposicao ou transbordamento observado
+Tamanho em bytes: 100727
+SHA-256: 808b26f8a62bd171d198ef46a1bc8dea9c526f2d5a405e1bfafdd42414e13bf8
+Fontes PDF: AAAAAA+TimesNewRomanPS-BoldMT, AAAAAA+TimesNewRomanPSMT

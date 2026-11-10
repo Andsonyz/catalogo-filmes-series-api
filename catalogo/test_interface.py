@@ -8,6 +8,20 @@ from catalogo.models import Genero
 
 
 class PaginaCatalogoTests(TestCase):
+    def test_gestao_e_dialogo_de_genero_oferecem_volta_ao_inicio(self):
+        response = self.client.get(reverse("catalogo"))
+        self.assertContains(response, 'href="/">Voltar à página inicial</a>', count=2)
+        self.assertContains(response, 'href="/assistir/"')
+
+    def test_acervo_e_generos_oferecem_volta_no_html_sem_mudar_json(self):
+        for route in ("titulos-list", "generos-list"):
+            with self.subTest(route=route):
+                response = self.client.get(reverse(route), HTTP_ACCEPT="text/html")
+                self.assertContains(response, 'href="/">Voltar à página inicial</a>')
+                self.assertContains(response, 'href="/assistir/"')
+                response = self.client.get(reverse(route), HTTP_ACCEPT="application/json")
+                self.assertEqual(response.json(), [])
+
     def test_pagina_renderiza_e_prepara_csrf_para_o_javascript(self):
         response = self.client.get(reverse("catalogo"))
 

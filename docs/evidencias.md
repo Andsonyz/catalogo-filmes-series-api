@@ -1,5 +1,25 @@
 # Unidade 02 — evidências
 
+## Estado atual — 10/11/2026
+
+Esta seção resume a cópia local atual. As seções posteriores preservam registros de etapas anteriores: nomes de arquivo, caminhos, contagens e decisões nelas descritos correspondem à época de cada execução e não substituem este resumo.
+
+- **Código e testes:** o catálogo possui `Genero` e `Titulo`, relacionados por chave estrangeira, endpoints DRF e regra de temporadas. O teste de comportamento da API está em [catalogo/teste.py](../catalogo/teste.py); outros testes cobrem as páginas e a pesquisa. Na execução atual, **33 testes passaram**. Um deles é o teste demonstrativo herdado de `users/tests.py`, que não verifica a API.
+- **Git:** a cópia estava na branch `main`, em `055936104d4207036792b557d70db8e81a41ce6c`, com alterações locais não commitadas. O histórico contém merge da branch de funcionalidade; as alterações locais ainda precisam ser incluídas na versão que será entregue. A medição considera o código local, não apenas o commit indicado.
+- **Cobertura:** **99,01% de linhas** (100 de 101) no Python de produção de `catalogo`. O método `__str__` de `Titulo`, em `catalogo/models.py:30`, ficou sem cobertura de linha. A métrica não mede caminhos, qualidade das asserções, JavaScript, HTML, CSS, `config` ou `users`.
+- **Complexidade ciclomática:** o maior valor entre funções e métodos medidos foi **6, classificação B**, em `pagina_assistir`, `catalogo/views.py:20`. O método `TituloSerializer.validate` teve complexidade **5, classificação A**. O valor mais alto da página indica que seus filtros e caminhos de validação devem continuar sendo revisados e testados quando a busca mudar; não é, por si só, prova de defeito ou de boa manutenibilidade.
+- **Reprodução e escopo:** foram usadas coverage.py 7.6.12 e Radon 6.0.1 com Python 3.11.9 no Windows. A medição inclui os nove arquivos Python de produção em `catalogo`, incluindo `forms.py`, `views.py` e os renderizadores; exclui testes, migrações, dependências e os outros apps. Os comandos estão no [README](../README.md#entrega-acadêmica-e-métricas); saídas completas em [registro-metricas-atual.log](registro-metricas-atual.log); resultados brutos em [cobertura-catalogo.json](cobertura-catalogo.json) e [complexidade-catalogo.json](complexidade-catalogo.json); e identificação do código medido em [manifesto-codigo-medido.json](manifesto-codigo-medido.json). O manifesto contém SHA-256 por arquivo, pois parte do código não estava commitada.
+- **Comparação histórica:** a medição de 09/11/2026 registrou 96,36% de cobertura e complexidade máxima 5 para funções/métodos. Seus arquivos originais foram recuperados em [cobertura histórica](metricas-historicas/cobertura-2026-11-09.json), [complexidade histórica](metricas-historicas/complexidade-2026-11-09.json) e [log da medição histórica](registro-finalizacao.log). O escopo atual é maior e inclui funcionalidades posteriores: os valores não representam uma comparação direta de melhoria ou regressão.
+- **Uso de IA:** [uso-ia.md](uso-ia.md) reúne o prompt e a resposta recuperados literalmente do commit `a9f354b`, a decisão de aceitar a sugestão e a verificação atual do teste sugerido: **1 passed** isoladamente. O registro da execução está no log da medição atual.
+
+### Relatório final
+
+O [relatório final em PDF](../output/pdf/Cadastro_filmes_series_Unidade02.pdf) foi gerado em 10/11/2026 e contém três páginas, conforme o limite do enunciado. Apresenta integrantes e contexto, entidades e endpoints, resultados dos testes, duas métricas e análise, o prompt real e a resposta da IA com decisão e validação, e principais dificuldades.
+
+Por solicitação do usuário, todo o conteúdo, inclusive títulos, tabelas e paginação, usa Times New Roman tamanho 12 e cor preta. Os parágrafos estão justificados. As três páginas foram renderizadas e inspecionadas visualmente; fonte, tamanho, cor, margens e incorporação das fontes foram conferidos no PDF. O registro técnico está em [validacao-relatorio.log](validacao-relatorio.log).
+
+O estado acima se refere à cópia local medida. A disponibilidade das alterações recentes no repositório remoto não foi verificada nesta etapa.
+
 ## Identificação e fontes
 
 - Disciplina: PEX1277 — Manutenção de Software, UFERSA.
@@ -205,9 +225,9 @@ Os títulos foram excluídos pela API. O gênero e o usuário/token temporários
 - Evidências e instruções de reprodução recebem commit documental separado.
 - Parar antes da etapa de testes automatizados. Continuam pendentes testes, métricas, análise acadêmica de uso de IA, merge e relatório final. O teste demonstrativo herdado continua no projeto; seu resultado antigo não representa validação automatizada da nova API.
 
-## Testes automatizados — etapa atual
+## Testes automatizados — registro histórico
 
-Implementados **14 testes da equipe** em [catalogo/tests.py](../catalogo/tests.py), usando `rest_framework.test.APITestCase`, integrados ao `pytest` e ao `pytest-django` já configurados em `pytest.ini`. Não foi necessária alteração no código da API, nas dependências nem no executor. Branch mantida: `feat/catalogo-audiovisual`.
+Implementados **14 testes da equipe** no arquivo então chamado `catalogo/tests.py`, usando `rest_framework.test.APITestCase`, integrados ao `pytest` e ao `pytest-django` já configurados em `pytest.ini`. O arquivo atual é [catalogo/teste.py](../catalogo/teste.py); os comandos e nomes históricos desta seção foram mantidos como executados. Não foi necessária alteração no código da API, nas dependências nem no executor. Branch mantida naquela etapa: `feat/catalogo-audiovisual`.
 
 Cada teste recebe gênero, usuário e token próprios em `setUp`, e cria os títulos de que precisa. O cliente envia autenticação Token real do DRF, sem `force_authenticate`. `APITestCase` isola e reverte os dados entre testes em banco SQLite de testes, separado do banco local. Não há dependência de IDs fixos, registros da equipe, ordem de execução ou servidor HTTP externo.
 
@@ -276,6 +296,6 @@ O teste cria seu próprio filme e envia exatamente `{"tipo":"serie"}`. Confere H
 | `venv/bin/python -m pytest -v` | **16 passed, 1 warning in 0.35s** | 0 |
 | `git diff --check` | Sem problemas | 0 |
 
-Contagem atualizada: **15 testes da equipe + 1 herdado = 16 testes**. Os resultados da rodada anterior continuam registrados acima. O único aviso permanece o `DeprecationWarning` da dependência `pytz`; não houve falha nem impedimento do ambiente. As três execuções passaram na primeira tentativa, sem correções adicionais.
+Contagem daquela rodada: **15 testes da equipe + 1 herdado = 16 testes**. Os resultados da rodada anterior continuam registrados acima. O único aviso era o `DeprecationWarning` da dependência `pytz`; não houve falha nem impedimento do ambiente. As três execuções passaram na primeira tentativa, sem correções adicionais.
 
 Comandos, horários UTC e saídas completas estão em [registro-teste-conversao.log](registro-teste-conversao.log). O SHA-256 do SQLite local permaneceu `6e4b87abfa1f50121cd3a63866e8026e0ee5e4ee7600badc5c51a380bade7c10`, idêntico ao início da rodada. A alteração local preexistente do banco foi preservada e fica fora do commit. Branch mantida: `feat/catalogo-audiovisual`.

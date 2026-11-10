@@ -1,0 +1,92 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>O que assistir — Catálogo de filmes e séries</title>
+  <link rel="stylesheet" href="{% static 'catalogo/catalogo.css' %}">
+  <link rel="stylesheet" href="{% static 'catalogo/assistir.css' %}">
+</head>
+<body>
+  <a class="skip-link" href="#busca">Ir para a pesquisa</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="{% url 'home' %}" aria-label="Catálogo, início">
+        <span class="brand-mark" aria-hidden="true">C<span>•</span></span>
+        <span>CATÁLOGO<small>FILMES & SÉRIES</small></span>
+      </a>
+      <span class="header-note">Histórias que ficam.</span>
+      <nav class="header-nav" aria-label="Navegação principal">
+        <a class="header-link" href="{% url 'home' %}">Voltar à página inicial</a>
+        <a class="header-link" href="{% url 'catalogo' %}">Gerenciar catálogo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell viewer-main">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow"><span aria-hidden="true">●</span> PARA QUEM AMA UMA BOA HISTÓRIA</p>
+        <h1 id="page-title">O que vamos<br><em>assistir hoje?</em></h1>
+        <p class="intro-description">Tem um filme em mente ou quer explorar um gênero?<br class="desktop-break"> Descubra o que está disponível no nosso catálogo.</p>
+      </div>
+      <div class="collection-count"><strong>{{ total_catalogo }}</strong><span>título{{ total_catalogo|pluralize }} para descobrir</span></div>
+    </section>
+
+    <section class="search-panel" id="busca" aria-labelledby="search-title">
+      <h2 id="search-title">Encontre sua próxima história</h2>
+      <p>Pesquise pelo nome, escolha um gênero ou combine os filtros.</p>
+      <form method="get" action="{% url 'assistir' %}" class="search-form">
+        {% if form.errors %}<p class="form-error search-errors" role="alert">Confira os filtros indicados e pesquise novamente.</p>{% endif %}
+        {% for field in form %}
+          <div class="field">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}<div id="{{ field.name }}-errors" class="field-error">{{ field.errors }}</div>{% endif %}
+          </div>
+        {% endfor %}
+        <button class="button primary" type="submit">Pesquisar catálogo <span aria-hidden="true">↗</span></button>
+        <a class="clear-filters" href="{% url 'assistir' %}">Limpar filtros</a>
+      </form>
+    </section>
+
+    <section class="viewer-results" aria-labelledby="results-title">
+      <div class="section-heading">
+        <h2 id="results-title">{% if request.GET %}Resultado da pesquisa{% else %}Explore o acervo{% endif %}</h2>
+        <p class="result-count" role="status">{{ page_obj.paginator.count }} título{{ page_obj.paginator.count|pluralize }} encontrado{{ page_obj.paginator.count|pluralize }}</p>
+      </div>
+      {% if titulos %}
+        <ul class="title-list viewer-list" aria-label="Títulos disponíveis">
+          {% for titulo in titulos %}
+            <li class="title-card">
+              <div class="title-art" aria-hidden="true"><span class="art-label">{% if titulo.tipo == 'serie' %}EM EPISÓDIOS{% else %}EM UM FILME{% endif %}</span><span class="art-symbol">{% if titulo.tipo == 'serie' %}S{% else %}F{% endif %}</span><span class="art-id">#{{ titulo.pk }}</span></div>
+              <div class="title-content">
+                <div class="title-meta"><span class="type-badge">{{ titulo.get_tipo_display }}</span>{% if titulo.tipo == 'serie' %}<span class="title-seasons">{{ titulo.numero_temporadas }} temporada{{ titulo.numero_temporadas|pluralize }}</span>{% endif %}</div>
+                <h3>{{ titulo.nome }}</h3>
+                <p class="title-genre">{{ titulo.genero.nome }}</p>
+                <p class="availability"><span aria-hidden="true">●</span> Disponível no catálogo</p>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+        {% if page_obj.has_other_pages %}
+          <nav class="pagination" aria-label="Páginas do catálogo">
+            {% if page_obj.has_previous %}<a class="button secondary" href="?{% if filtros_query %}{{ filtros_query }}&amp;{% endif %}page={{ page_obj.previous_page_number }}">← Anterior</a>{% endif %}
+            <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}<a class="button secondary" href="?{% if filtros_query %}{{ filtros_query }}&amp;{% endif %}page={{ page_obj.next_page_number }}">Próxima →</a>{% endif %}
+          </nav>
+        {% endif %}
+      {% elif form.errors %}
+        <div class="empty-state"><h3>Vamos ajustar a pesquisa?</h3><p>Revise os campos destacados acima para consultar o catálogo.</p></div>
+      {% elif not total_catalogo %}
+        <div class="empty-state"><span class="empty-icon" aria-hidden="true">▤</span><h3>O catálogo ainda está vazio</h3><p>Assim que novos filmes e séries forem cadastrados, eles aparecerão por aqui.</p></div>
+      {% else %}
+        <div class="empty-state"><span class="empty-icon" aria-hidden="true">⌕</span><h3>Nenhum título encontrado</h3><p>Não há títulos no catálogo com essa combinação. Tente outro nome ou gênero.</p><a class="button secondary" href="{% url 'assistir' %}">Explorar todo o acervo</a></div>
+      {% endif %}
+    </section>
+
+    <footer class="site-footer"><span>CATÁLOGO / Filmes & séries</span><span>Encontre uma história que combine com você.</span></footer>
+  </main>
+</body>
+</html>
